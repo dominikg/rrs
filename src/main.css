@@ -1,0 +1,25 @@
+@import "tailwindcss/base.css";
+@import "tailwindcss/components.css";
+@import "tailwindcss/utilities.css";
+
+.bg-penguin{
+  background-image: url('static/penguin.png')
+}
+.bg-elephant {
+  background-image: url('static/elephant.png')
+}
+.bg-cat {
+  background-image: url('static/cat.png')
+}
+
+.bg-node-module {
+  background-image: url('node_modules/@mdi/svg/svg/ab-testing.svg')
+}
+.foo {
+  color: blue;
+}
+
+.elephant,.bg-elephant {
+  width: 100px;
+  height:100px;
+}
