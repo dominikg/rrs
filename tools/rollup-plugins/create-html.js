@@ -15,11 +15,10 @@ function mapEntriesAndAssetsByType(bundle) {
     css
   };
   if(faviconEntry) {
-    console.log(faviconEntry.code);
     const match = faviconEntry.code.match(/"([^"]*favicon(?:~[^\.]+)?.png)"/m);
     if(match && match.length > 1) {
       const fileName = match[1].startsWith('./') ? match[1].substring(2) : match[1];
-      result.favicon = {fileName }
+      result.favicon = {fileName}
     }
   }
   return result;

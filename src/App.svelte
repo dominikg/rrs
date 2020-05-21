@@ -16,9 +16,16 @@
 <Nav/>
 <img alt="penguin" src={penguin}>
 <div class="elephant"></div>
-<img alt="cat" src="static/cat.png"/> <!-- case 3, hardcoded in template-->
+<img alt="cat" src="static/cat.png"/>
 <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
     <use  xlink:href={`${account_plus}#mdi-account-plus`}></use>
 </svg>
 <button on:click={loadLazy}>loadLazy</button>
 <svelte:component this={lazy}></svelte:component>
+<img alt="x" src="http://foo.com/bar.jpg"/>
+<img alt="x" src="https://foo.com/bar.jpg"/>
+<img alt="x" src="//foo.com/bar.jpg"/>
+<img alt="x" src="foo.com/bar.jpg"/>
+<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+    <use  xlink:href="node_modules/@mdi/svg/svg/account-plus.svg#mdi-account-plus"></use>
+</svg>

@@ -31,6 +31,7 @@
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "ejs": "^3.1.2",
+    "micromatch": "^4.0.2",
     "postcss": "^7.0.30",
     "postcss-import": "^12.0.1",
     "postcss-load-config": "^2.1.0",

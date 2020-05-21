@@ -8,6 +8,7 @@ import smartAsset from "rollup-plugin-smart-asset";
 import del from "rollup-plugin-delete";
 import html from './tools/rollup-plugins/create-html';
 import path from 'path';
+import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
 
 const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants')
 
@@ -19,12 +20,12 @@ export default (async () => ({
     replace({
       'process.env.NODE_ENV': JSON.stringify( buildMode )
     }),
-    alias({ entries:assetRoots.map(root =>
-        ({
+    alias({
+      entries:assetRoots.map(root => ({
           find: root,
           replacement:  path.resolve(__dirname,root)
         }))
-      }),
+    }),
     svelte({
 
       // enable run-time checks when not in production
@@ -33,6 +34,9 @@ export default (async () => ({
       // we'll extract any component CSS out into
       // a separate file — better for performance
       emitCss: true,
+      preprocess: [
+        smartAssetPreprocessor({outputDir: buildDir})
+      ]
 
     }),
     ...assetRoots.map(root => smartAsset({
@@ -51,7 +55,7 @@ export default (async () => ({
     postcss({
       extract: true,
       to: `${buildDir}/main.css`,
-      sourceMap: !isProduction || 'hidden'
+      sourceMap: !isProduction,
     }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
@@ -68,7 +72,7 @@ export default (async () => ({
   ],
 
   treeshake: !!isProduction,
-
+  preserveEntrySignatures: false,
   output: { // required (can be an array, for multiple outputs)
     // core output options
     dir: `${buildDir}`,
