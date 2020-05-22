@@ -8,9 +8,6 @@
 .bg-elephant {
   background-image: url('static/elephant.png')
 }
-.bg-cat {
-  background-image: url('static/cat.png')
-}
 
 .bg-node-module {
   background-image: url('node_modules/@mdi/svg/svg/ab-testing.svg')

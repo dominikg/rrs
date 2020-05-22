@@ -90,9 +90,13 @@ function splitQueryAndHash(path) {
 }
 
 async function process(assets,options) {
-  const processes = assets.map(
-    asset => cssProcessor.process(`a{background-image:url('${asset.path}')}`,{from:'src/fake.css',to:`${options.outputDir}/fake.css`,sourceMap: false}
-    ).then(result => asset.updatedPath=result.css.substring(24,result.css.length-3)));
+  const processes = assets.map(asset => cssProcessor.process(
+      `a{background-image:url('${asset.path}')}`, // fake css to get postcss-smart-asset to work
+      {
+        from:'src/fake.css',
+        to:`${options.outputDir}/fake.css`,
+        sourceMap: false
+      }).then(result => asset.updatedPath=result.css.slice(24,-3))); // extract new path from css after postcss-smart-asset
   await Promise.all(processes);
 }
 
