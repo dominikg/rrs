@@ -1,0 +1,28 @@
+:root {
+  --color-primary: orange;
+  --color-secondary: lightblue;
+  --color-regular: #111;
+  --background-color-regular: #eee;
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root {
+    --color-regular: #eee;
+    --background-color-regular: #111;
+  }
+  body.theme-light {
+    --color-regular: #111;
+    --background-color-regular: #eee;
+  }
+}
+
+@media only screen and (prefers-color-scheme: light) {
+  :root {
+    --color-regular: #111;
+    --background-color-regular: #eee;
+  }
+  body.theme-dark {
+    --color-regular: #eee;
+    --background-color-regular: #111;
+  }
+}

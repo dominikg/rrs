@@ -9,12 +9,13 @@ import del from "rollup-plugin-delete";
 import html from './tools/rollup-plugins/create-html';
 import path from 'path';
 import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
+import routify from '@sveltech/routify/plugins/rollup'
 
 const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants')
 
 export default (async () => ({
 
-  input:['src/main.css','src/main.js','static/favicon.png'], // required
+  input:['src/style/main.css','src/main.js','static/favicon.png'], // required
   plugins: [
     del({targets: [buildDir],verbose: isDebug, runOnce: isWatch}),
     replace({
@@ -26,6 +27,10 @@ export default (async () => ({
           replacement:  path.resolve(__dirname,root)
         }))
     }),
+    alias({
+      entries:[{find: '@components', replacement: path.resolve(__dirname,'src/components/')}]
+    }),
+    routify({watchDelay: 0}),
     svelte({
 
       // enable run-time checks when not in production

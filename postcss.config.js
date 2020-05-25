@@ -21,7 +21,7 @@ module.exports = {
             require("postcss-import"),
             require("postcss-smart-asset")(smartAssetsCfg),
             require("tailwindcss")("./tailwind.config.js"),
-            require("autoprefixer"),
+            require("postcss-preset-env")({stage:1}),
             isProduction && require("cssnano")({
                 preset: [
                     "default",
