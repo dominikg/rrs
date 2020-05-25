@@ -1,28 +1,28 @@
 :root {
-  --color-primary: orange;
-  --color-secondary: lightblue;
-  --color-regular: #111;
-  --background-color-regular: #eee;
+  --color-primary: #fe4f09;
+  --color-secondary: #636579;
+  --color-regular: #dedede;
+  --background-color-regular: #121212;
 }
 
 @media only screen and (prefers-color-scheme: dark) {
   :root {
-    --color-regular: #eee;
-    --background-color-regular: #111;
+    --color-regular: #dedede;
+    --background-color-regular: #121212;
   }
   body.theme-light {
-    --color-regular: #111;
-    --background-color-regular: #eee;
+    --color-regular: #121212;
+    --background-color-regular: #dedede;
   }
 }
 
 @media only screen and (prefers-color-scheme: light) {
   :root {
-    --color-regular: #111;
-    --background-color-regular: #eee;
+    --color-regular: #121212;
+    --background-color-regular: #dedede;
   }
   body.theme-dark {
-    --color-regular: #eee;
-    --background-color-regular: #111;
+    --color-regular: #dedede;
+    --background-color-regular: #121212;
   }
 }

@@ -1,18 +1,25 @@
 <script>
-    import {onMount} from 'svelte';
+    let theme = getInitialTheme();
+    let themeColor = getThemeColor();
     function getInitialTheme() {
         if(!window) {
-          return 'light';
+          return 'dark';
         }
         const storedValue = window.localStorage.getItem('theme');
         if (storedValue) {
             document.body.classList.add(`theme-${storedValue}`)
             return storedValue;
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
     }
 
-    let theme = getInitialTheme();
+    function getThemeColor() {
+        const body = document && document.body;
+        if(!body) {
+          return '#121212'
+        }
+        return getComputedStyle(body).getPropertyValue('--color-primary')
+    }
 
     function toggleTheme() {
         const body = document.body;
@@ -20,6 +27,7 @@
         theme = (theme === 'dark' ? 'light' : 'dark');
         body.classList.add(`theme-${theme}`);
         window.localStorage.setItem('theme', theme );
+        themeColor = getThemeColor();
     }
 </script>
 <style>
@@ -37,3 +45,6 @@
         <use href="node_modules/@mdi/svg/svg/lightbulb-on-outline.svg#mdi-lightbulb-on-outline"></use>
     {/if}}
 </svg>
+<svelte:head>
+    <meta name="theme-color" content="{themeColor}">
+</svelte:head>

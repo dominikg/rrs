@@ -7,17 +7,13 @@
     @apply grid grid-cols-1 min-h-screen;
     grid-template-rows: max-content 1fr auto;
 }
-#footer {
-    grid-row-start: 3;
-    grid-row-end:4;
-}
 </style>
 <div id="app">
     <Nav/>
-    <main class="p-4">
+    <main class="p-4 max-w-xl mx-auto">
         <slot />
     </main>
-    <Footer id="footer"/>
+    <Footer/>
 </div>
 
 

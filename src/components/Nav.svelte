@@ -3,7 +3,7 @@
     import ThemeSwitch from "./ThemeSwitch.svelte";
 
     const navitems = [
-        ['./example', 'Example'],
+        ['./example', 'Routify Examples'],
         ['./playground', 'Playground'],
         ['./blog', 'Blog']
     ]
