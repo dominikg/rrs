@@ -10,4 +10,7 @@ here's an image for you
 
 ```js
 const     bar = "baz";
+function foo() {
+  return 2 * 3;
+}
 ```
