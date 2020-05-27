@@ -19,7 +19,7 @@
     .app-logo {
         @apply w-8 h-8 mx-2;
         stroke: var(--color-primary);
-        fill: var(--background-color-regular);
+        fill: none;
     }
     .nav-item {
         @apply flex items-center flex-shrink-0  text-primary  mr-4 transition-all ease-in-out duration-200 border-b py-2 px-4;
@@ -35,7 +35,7 @@
     <a href="/" class="flex items-center flex-shrink-0 mr-6">
 
             <svg viewBox="0 0 98.1 118" class="app-logo">
-                <use href="static/app-logo.svg#logo"></use>
+                <use href="static/favicon.svg#logo"></use>
             </svg>
             <span class="text-xl text-primary">A svelte app</span>
 

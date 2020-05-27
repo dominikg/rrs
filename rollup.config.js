@@ -17,7 +17,7 @@ const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetR
 
 export default (async () => ({
 
-  input:['src/style/main.css','src/main.js','static/favicon.png'], // required
+  input:['src/style/main.css','src/main.js','static/favicon.svg'], // required
   plugins: [
     del({targets: [buildDir],verbose: isDebug, runOnce: isWatch}),
     replace({

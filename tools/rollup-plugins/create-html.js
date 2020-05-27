@@ -8,14 +8,14 @@ function mapEntriesAndAssetsByType(bundle) {
   const items = Object.values(bundle);
   const js = items.filter(item => (item.isEntry && item.fileName.endsWith('.js') && item.facadeModuleId.endsWith('.js')));
   const css = items.filter( item => (item.type === 'asset' || item.isAsset) && item.fileName.endsWith('.css'))
-  const faviconEntry = items.find(item => item.facadeModuleId.endsWith('favicon.png'))
+  const faviconEntry = items.find(item => item.facadeModuleId.endsWith('favicon.svg'))
 
   const result = {
     js,
     css
   };
   if(faviconEntry) {
-    const match = faviconEntry.code.match(/"([^"]*favicon(?:~[^\.]+)?.png)"/m);
+    const match = faviconEntry.code.match(/"([^"]*favicon(?:~[^\.]+)?.svg)"/m);
     if(match && match.length > 1) {
       const fileName = match[1].startsWith('./') ? match[1].substring(2) : match[1];
       result.favicon = {fileName}
