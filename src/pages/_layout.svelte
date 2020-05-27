@@ -1,16 +1,19 @@
 <script>
-    import Nav from "@components/Nav.svelte";
-    import Footer from "@components/Footer.svelte";
+    import Nav from "src/components/Nav.svelte";
+    import Footer from "src/components/Footer.svelte";
 </script>
 <style>
 #app {
-    @apply grid grid-cols-1 min-h-screen;
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 1fr;
     grid-template-rows: max-content 1fr auto;
+    grid-gap: 1rem;
 }
 </style>
 <div id="app">
     <Nav/>
-    <main class="p-4 max-w-xl mx-auto">
+    <main class="w-full max-w-screen-xl mx-auto">
         <slot />
     </main>
     <Footer/>

@@ -3,7 +3,7 @@
     import account_plus from 'node_modules/@mdi/svg/svg/account-plus.svg'
     let lazy;
     function loadLazy() {
-        import('@components/Lazy.svelte').then(m => lazy = m.default);
+        import('src/components/Lazy.svelte').then(m => lazy = m.default);
     }
 </script>
 

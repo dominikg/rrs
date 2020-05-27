@@ -28,7 +28,7 @@ export default (async () => ({
         }))
     }),
     alias({
-      entries:[{find: '@components', replacement: path.resolve(__dirname,'src/components/')}]
+      entries:[{find: 'src', replacement: path.resolve(__dirname,'src/')}]
     }),
     routify({watchDelay: 0}),
     svelte({
