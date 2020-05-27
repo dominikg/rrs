@@ -7,9 +7,11 @@ import postcss from "rollup-plugin-postcss";
 import smartAsset from "rollup-plugin-smart-asset";
 import del from "rollup-plugin-delete";
 import html from './tools/rollup-plugins/create-html';
+import serve from './tools/rollup-plugins/serve';
 import path from 'path';
 import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
-import routify from '@sveltech/routify/plugins/rollup'
+import routify from '@sveltech/routify/plugins/rollup';
+import livereload from 'rollup-plugin-livereload';
 
 const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants')
 
@@ -73,7 +75,9 @@ export default (async () => ({
     }),
     commonjs(),
     isProduction && (await import('rollup-plugin-terser')).terser(),
-    html({templateData: {title: 'hooray'}})
+    html({templateData: {title: 'hooray'}}),
+    isWatch && serve({dir:buildDir}),
+    isWatch && livereload()
   ],
 
   treeshake: !!isProduction,

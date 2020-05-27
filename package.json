@@ -8,7 +8,8 @@
     "dev": "rollup -cw",
     "build": "rollup -c",
     "build:prod": "cross-env NODE_ENV=production npm run build",
-    "serve:build": "serve -s build"
+    "serve": "serve -s",
+    "serve:build": "npm run serve -- build"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "postcss-smart-asset": "^1.0.5",
     "rollup": "^2.10.2",
     "rollup-plugin-delete": "^1.2.0",
+    "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-postcss": "^3.1.1",
     "rollup-plugin-smart-asset": "^2.0.7",
     "rollup-plugin-svelte": "^5.2.1",

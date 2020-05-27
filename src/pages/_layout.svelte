@@ -13,7 +13,7 @@
 </style>
 <div id="app">
     <Nav/>
-    <main class="w-full max-w-screen-xl mx-auto">
+    <main class="w-full max-w-screen-xl mx-auto px-4">
         <slot />
     </main>
     <Footer/>
