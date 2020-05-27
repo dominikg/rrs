@@ -12,6 +12,8 @@ import path from 'path';
 import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
 import routify from '@sveltech/routify/plugins/rollup';
 import livereload from 'rollup-plugin-livereload';
+import {mdsvex} from 'mdsvex';
+import createHighlighter from  "./tools/mdsvex/shiki-highlighter";
 
 const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants')
 
@@ -41,7 +43,12 @@ export default (async () => ({
       // we'll extract any component CSS out into
       // a separate file — better for performance
       emitCss: true,
+      extensions: [".svelte", ".md"],
       preprocess: [
+        mdsvex({
+          extension:'.md',
+          highlight: {highlighter: await createHighlighter()}
+        }),
         smartAssetPreprocessor({outputDir: buildDir})
       ]
 
