@@ -79,11 +79,9 @@ here's an image for you
       {name}
     </a>
   {/each}
-  <div class="overlay" bind:this={overlay} style="background-color: {color}" />
+  <div class="overlay" bind:this={overlay} style="background-color: {color}" />    
 </nav>
-
 ```
 ```shell script
-npm install foo bar baz -- -- bla
-
+npm install foo bar baz -- -- bla    
 ```

@@ -7,7 +7,18 @@
     <% if (!!files.favicon) { %><link rel="shortcut icon" href="/<%=files.favicon.fileName%>" type="image/svg+xml"><% } %>
     <% if (!!files.css) for (const {fileName} of files.css) { %><link rel="stylesheet" type="text/css" href="/<%= fileName %>" /><% } %>
 </head>
-<body class="font-sans text-regular border-regular bg-regular transition-colors ease-in-out duration-200">
+<body class="font-sans text-on-regular border-on-regular bg-regular">
+
+    <script type="application/javascript">
+      (function () {
+        if(window && document) {
+          const t = window.localStorage.getItem('theme');
+          if (t) {
+            document.body.classList.add(`theme-${t}`)
+          }
+        }
+      })();
+    </script>
     <%if(files.js) for (const {fileName} of files.js ) {%><script type="module" defer src="/<%= fileName %>"></script><% } %>
 </body>
 </html>

@@ -1,0 +1,16 @@
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar);
+  border-radius: 0.25rem;
+}

@@ -1,15 +1,16 @@
 .code-highlight {
   position: relative;
-  @apply font-mono text-sm shadow-md rounded p-4 m-4;
+  @apply font-mono text-sm shadow-md rounded;
   overflow: auto;
   max-height: 80vh;
+  padding: 1rem;
+  margin: 1rem;
 }
-.code-highlight > .lang {
+.code-highlight > .code-language {
   position: absolute;
   top: 0;
   right: 0;
   @apply bg-primary text-on-primary px-2;
   border-top-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
-
 }

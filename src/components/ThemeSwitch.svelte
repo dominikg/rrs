@@ -7,7 +7,6 @@
         }
         const storedValue = window.localStorage.getItem('theme');
         if (storedValue) {
-            document.body.classList.add(`theme-${storedValue}`)
             return storedValue;
         }
         return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
@@ -23,11 +22,17 @@
 
     function toggleTheme() {
         const body = document.body;
+        body.classList.add('transition-colors', 'ease-in-out', 'duration-500')
         body.classList.remove(`theme-${theme}`);
         theme = (theme === 'dark' ? 'light' : 'dark');
         body.classList.add(`theme-${theme}`);
         window.localStorage.setItem('theme', theme );
         themeColor = getThemeColor();
+        const onTransitionEnd = function(e) {
+          body.removeEventListener('transitionend',onTransitionEnd);
+          body.classList.remove('transition-colors', 'ease-in-out', 'duration-500')
+        }
+        body.addEventListener('transitionend',onTransitionEnd)
     }
 </script>
 <style>

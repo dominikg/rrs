@@ -1,6 +1,7 @@
 @import "tailwindcss/base.css";
 @import "./variables.css";
 @import "./font.css";
+@import "./scrollbar.css";
 @import "./blog.css";
 @import "tailwindcss/components.css";
 @import "tailwindcss/utilities.css";
