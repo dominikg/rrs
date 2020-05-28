@@ -6,6 +6,8 @@ const colorVariables = ['primary','secondary','regular'];
 produceColorVariables = function(prefix) {
   return colorVariables.reduce((map, name) => {
     map[name]=`var(--${prefix ? `${prefix}-`:''}color-${name}${prefix ?`,var(--color-${name})` :''})`;
+    const onName = `on-${name}`;
+    map[onName]=`var(--${prefix ? `${prefix}-`:''}color-${onName}${prefix ?`,var(--color-${onName})` :''})`;
     return map;
   },{});
 }
@@ -24,6 +26,10 @@ module.exports = {
       fontFamily: {
         sans: [
           "'Cooper Hewitt'",
+          ...defaultTheme.fontFamily.sans,
+        ],
+        mono: [
+          "'Fira Code'",
           ...defaultTheme.fontFamily.sans,
         ]
       }

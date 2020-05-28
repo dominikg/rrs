@@ -1,0 +1,15 @@
+.code-highlight {
+  position: relative;
+
+  @apply font-mono shadow-md rounded p-4 m-4;
+}
+.code-highlight > .lang {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  @apply bg-primary text-on-primary px-2 text-sm;
+  border-top-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+
+}
