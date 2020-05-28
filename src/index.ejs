@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <% if (!!title) { %><title><%=title%></title><% } %>
-    <% if (!!files.favicon) { %><link rel="shortcut icon" href="<%=files.favicon.fileName%>" type="image/png"><% } %>
-    <% if (!!files.css) for (const {fileName} of files.css) { %><link rel="stylesheet" type="text/css" href="<%= fileName %>" /><% } %>
+    <% if (!!files.favicon) { %><link rel="shortcut icon" href="/<%=files.favicon.fileName%>" type="image/svg+xml"><% } %>
+    <% if (!!files.css) for (const {fileName} of files.css) { %><link rel="stylesheet" type="text/css" href="/<%= fileName %>" /><% } %>
 </head>
 <body class="font-sans text-regular border-regular bg-regular transition-colors ease-in-out duration-200">
-    <%if(files.js) for (const {fileName} of files.js ) {%><script type="module" defer src="<%= fileName %>"></script><% } %>
+    <%if(files.js) for (const {fileName} of files.js ) {%><script type="module" defer src="/<%= fileName %>"></script><% } %>
 </body>
 </html>

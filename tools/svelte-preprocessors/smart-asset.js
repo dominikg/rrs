@@ -96,7 +96,7 @@ async function process(assets,options) {
         from:'src/fake.css',
         to:`${options.outputDir}/fake.css`,
         sourceMap: false
-      }).then(result => asset.updatedPath=result.css.slice(24,-3))); // extract new path from css after postcss-smart-asset
+      }).then(result => asset.updatedPath=result.css.slice(25,-3))); // extract new path from css after postcss-smart-asset
   await Promise.all(processes);
 }
 
