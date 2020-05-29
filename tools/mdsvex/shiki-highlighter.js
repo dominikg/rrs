@@ -18,18 +18,15 @@ function escape(str) {
 }
 
 function render(lines, options = {}) {
-  const bg = options.bg || '#222222'
-  const fg = options.fg || '#EEDDEE'
+  const {fg,bg} = options;
   const lang = options.lang ? `<span class="code-language">${options.lang}</span>` : ''
-  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">${lang}<code>${lines.map(renderLine(options)).join('\n')}\n</code></pre>`;
+  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">${lang}<code>${lines.map(lineRenderer(options)).join('\n')}\n</code></pre>`;
 }
 
-const renderLine = options => (line) => {
-  return line.map(renderToken(options)).join('');
-}
+const lineRenderer = options => (line) => line.map(tokenRenderer(options)).join('')
 
-const renderToken = options => (token) => {
-  if(token.color && token.color.toUpperCase() === options.fg) {
+const tokenRenderer = options => (token) => {
+  if(!token.color || token.color.toUpperCase() === options.fg) {
     return escape(token.content);
   }
   const {leadingWS,content,trailingWS} = splitLeadingAndTrailingWS(token.content);
@@ -76,8 +73,8 @@ function isPlaintext(lang) {
 
 const defaultOpts = {
   theme: 'nord',
-  foreground: undefined,
-  background: undefined,
+  fg: undefined,
+  bg: undefined,
 };
 
 export default async function createHighlighter(opts) {
@@ -88,11 +85,11 @@ export default async function createHighlighter(opts) {
   } else {
     options.theme = getTheme(options.theme);
   }
-
   const baseSettings = ((options.theme["tokenColors"]||[]).find(x => !x.scope)||{settings:{}}).settings;
   const colors = options.theme.colors || {};
-  const fg = (options.foreground || baseSettings["foreground"] || colors["editor.foreground"] || colors["foreground"] || "#eeeeee").toUpperCase() ;
-  const bg = (options.background || baseSettings["background"] || colors["editor.background"] || colors["background"] || "#222222").toUpperCase() ;
+  const getThemeColor = name => baseSettings[name] || colors[`editor.${name}`] || colors[name];
+  const fg = (options.fg || getThemeColor("foreground") || "#eeeeee").toUpperCase() ;
+  const bg = (options.bg || getThemeColor("background") || "#222222").toUpperCase() ;
   return getHighlighter(options).then(
     highlighter => (code,lang) =>
          render(isPlaintext(lang) ? [[{content: code}]] : highlighter.codeToThemedTokens(code,lang),{fg,bg,lang})
