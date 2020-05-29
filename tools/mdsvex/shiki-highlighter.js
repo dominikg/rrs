@@ -30,7 +30,7 @@ const renderLine = options => (line) => {
 
 const renderToken = options => (token) => {
   if(token.color === options.fg) {
-    return token.content;
+    return escape(token.content);
   }
   const {leadingWS,content,trailingWS} = splitLeadingAndTrailingWS(token.content);
   if(!content) {
