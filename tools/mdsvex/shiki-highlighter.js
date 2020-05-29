@@ -1,5 +1,5 @@
 import {getHighlighter} from 'shiki';
-import {getTheme} from 'shiki-themes';
+import {getTheme, loadTheme} from 'shiki-themes';
 
 const escapeChars = {
   '<': '&lt;',
@@ -29,13 +29,14 @@ const renderLine = options => (line) => {
 }
 
 const renderToken = options => (token) => {
-  if(token.color === options.fg) {
+  if(token.color && token.color.toUpperCase() === options.fg) {
     return escape(token.content);
   }
   const {leadingWS,content,trailingWS} = splitLeadingAndTrailingWS(token.content);
   if(!content) {
     return leadingWS;
   }
+
   return `${leadingWS}<span style="color: ${token.color}">${escape(content)}</span>${trailingWS}`
 }
 
@@ -74,17 +75,24 @@ function isPlaintext(lang) {
 }
 
 const defaultOpts = {
-  theme: 'nord'
+  theme: 'nord',
+  foreground: undefined,
+  background: undefined,
 };
 
 export default async function createHighlighter(opts) {
   const options = {...defaultOpts,...opts};
-  if(!options.theme.name) {
-    options.theme = getTheme(options.theme)
-  }
-  const fg = options.theme.colors.foreground.toUpperCase();
-  const bg = options.theme.bg.toUpperCase();
 
+  if(options.theme.endsWith('.json')) {
+    options.theme = loadTheme(options.theme);
+  } else {
+    options.theme = getTheme(options.theme);
+  }
+
+  const baseSettings = ((options.theme["tokenColors"]||[]).find(x => !x.scope)||{settings:{}}).settings;
+  const colors = options.theme.colors || {};
+  const fg = (options.foreground || baseSettings["foreground"] || colors["editor.foreground"] || colors["foreground"] || "#eeeeee").toUpperCase() ;
+  const bg = (options.background || baseSettings["background"] || colors["editor.background"] || colors["background"] || "#222222").toUpperCase() ;
   return getHighlighter(options).then(
     highlighter => (code,lang) =>
          render(isPlaintext(lang) ? [[{content: code}]] : highlighter.codeToThemedTokens(code,lang),{fg,bg,lang})
