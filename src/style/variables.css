@@ -1,13 +1,13 @@
 :root {
-  --color-regular-light:#dedede;
-  --color-regular-dark:#121212;
+  --color-regular-light: #dedede;
+  --color-regular-dark: #121212;
   --color-primary: #fe4f09;
   --color-on-primary: #dedede;
   --color-secondary: #123456;
   --color-on-secondary: #dedede;
   --color-regular: var(--color-regular-light);
   --color-on-regular: var(--color-regular-dark);
-  --color-scrollbar:rgba(127,127,127,0.5);
+  --color-scrollbar: rgba(127, 127, 127, 0.5);
 }
 
 @media only screen and (prefers-color-scheme: dark) {
@@ -15,6 +15,7 @@
     --color-regular: var(--color-regular-dark);
     --color-on-regular: var(--color-regular-light);
   }
+
   body.theme-light {
     --color-regular: var(--color-regular-light);
     --color-on-regular: var(--color-regular-dark);
@@ -26,6 +27,7 @@
     --color-regular: var(--color-regular-light);
     --color-on-regular: var(--color-regular-dark);
   }
+
   body.theme-dark {
     --color-regular: var(--color-regular-dark);
     --color-on-regular: var(--color-regular-light);
