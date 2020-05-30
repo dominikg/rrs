@@ -2,7 +2,7 @@ const svelte = require('svelte/compiler');
 const postcss = require('postcss');
 const path = require('path');
 const postcssCfg = require(path.resolve(__dirname,'postcss.config.js')); // why does it work this way
-const smartAssetPlugin =postcssCfg.plugins.find(plugin => plugin.postcssPlugin === "postcss-smart-asset");
+const smartAssetPlugin =postcssCfg.plugins.find(plugin => plugin.postcssPlugin === 'postcss-smart-asset');
 const smartAssetsCfg = postcssCfg.smartAssetsCfg;
 const micromatch = require('micromatch');
 const cssProcessor = postcss(smartAssetPlugin);
@@ -18,33 +18,33 @@ async function collectAssets(content) {
   const assetPaths = [];
   const ast = svelte.parse(content);
   await svelte.walk(ast,{enter:(node) => {
-      if (!node.attributes
+    if (!node.attributes
         || node.attributes.length === 0
-        || !["Element", "Fragment", "InlineComponent"].includes(node.type)) {
-        return;
-      }
-      const candidates = node.attributes.filter(attribute => ['src','href','xlink:href'].includes(attribute.name)
-        && attribute.value.length === 1 && attribute.value[0].type === 'Text'
-      );
-      if(candidates.length === 0) {
-        return;
-      }
-      const paths = candidates.map(attribute => attribute.value[0]).filter(attributeValue => {
-        if (isRelative(attributeValue.data)) {
-          const {path,queryAndHash} = splitQueryAndHash(attributeValue.data);
-          if(isHandledBySmartAsset(path)) {
-            attributeValue.path = path;
-            attributeValue.queryAndHash = queryAndHash;
-            return true;
-          }
-        }
-        return false;
-      });
-      if(paths.length === 0) {
-        return;
-      }
-      assetPaths.push(...paths)
+        || !['Element', 'Fragment', 'InlineComponent'].includes(node.type)) {
+      return;
     }
+    const candidates = node.attributes.filter(attribute => ['src','href','xlink:href'].includes(attribute.name)
+        && attribute.value.length === 1 && attribute.value[0].type === 'Text'
+    );
+    if(candidates.length === 0) {
+      return;
+    }
+    const paths = candidates.map(attribute => attribute.value[0]).filter(attributeValue => {
+      if (isRelative(attributeValue.data)) {
+        const {path,queryAndHash} = splitQueryAndHash(attributeValue.data);
+        if(isHandledBySmartAsset(path)) {
+          attributeValue.path = path;
+          attributeValue.queryAndHash = queryAndHash;
+          return true;
+        }
+      }
+      return false;
+    });
+    if(paths.length === 0) {
+      return;
+    }
+    assetPaths.push(...paths);
+  }
   });
   return assetPaths;
 }
@@ -81,22 +81,22 @@ function isHandledBySmartAssetCfg(cfg,path) {
 }
 
 function isRelative(url) {
-  return !url.match(/(https?:)?\/\//)
+  return !url.match(/(https?:)?\/\//);
 }
 
 function splitQueryAndHash(path) {
-  const match = path.match(/^([^\?#]*)([\?#].*)?$/);
-  return {path: match[1],queryAndHash: match[2]}
+  const match = path.match(/^([^?#]*)([?#].*)?$/);
+  return {path: match[1],queryAndHash: match[2]};
 }
 
 async function process(assets,options) {
   const processes = assets.map(asset => cssProcessor.process(
-      `a{background-image:url('${asset.path}')}`, // fake css to get postcss-smart-asset to work
-      {
-        from:'src/fake.css',
-        to:`${options.outputDir}/fake.css`,
-        sourceMap: false
-      }).then(result => asset.updatedPath=result.css.slice(25,-3))); // extract new path from css after postcss-smart-asset
+    `a{background-image:url('${asset.path}')}`, // fake css to get postcss-smart-asset to work
+    {
+      from:'src/fake.css',
+      to:`${options.outputDir}/fake.css`,
+      sourceMap: false
+    }).then(result => asset.updatedPath=result.css.slice(25,-3))); // extract new path from css after postcss-smart-asset
   await Promise.all(processes);
 }
 
@@ -106,7 +106,7 @@ async function update(content,assets) {
   return {
     code,
     dependencies
-  }
+  };
 }
 
 function replacePaths(content,assets) {
@@ -117,13 +117,13 @@ function replacePaths(content,assets) {
     result += updatedPath+(queryAndHash||'');
     pos = end;
   }
-  result+=content.slice(pos)
+  result+=content.slice(pos);
   return result;
 }
 
 const defaultOpts = {
   outputDir: 'build'
-}
+};
 
 function smartAssetPreprocessor(opts = {}) {
   const options = {

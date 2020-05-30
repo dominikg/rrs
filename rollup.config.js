@@ -3,19 +3,19 @@ import alias from '@rollup/plugin-alias';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import postcss from "rollup-plugin-postcss";
-import smartAsset from "rollup-plugin-smart-asset";
-import del from "rollup-plugin-delete";
+import postcss from 'rollup-plugin-postcss';
+import smartAsset from 'rollup-plugin-smart-asset';
+import del from 'rollup-plugin-delete';
 import html from './tools/rollup-plugins/create-html';
 import serve from './tools/rollup-plugins/serve';
 import path from 'path';
-import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
+import smartAssetPreprocessor from './tools/svelte-preprocessors/smart-asset';
 import routify from '@sveltech/routify/plugins/rollup';
 import livereload from 'rollup-plugin-livereload';
 import {mdsvex} from 'mdsvex';
-import createHighlighter from  "./tools/mdsvex/shiki-highlighter";
+import createHighlighter from  './tools/mdsvex/shiki-highlighter';
 
-const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants')
+const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants');
 
 export default (async () => ({
 
@@ -27,9 +27,9 @@ export default (async () => ({
     }),
     alias({
       entries:assetRoots.map(root => ({
-          find: root,
-          replacement:  path.resolve(__dirname,root)
-        }))
+        find: root,
+        replacement:  path.resolve(__dirname,root)
+      }))
     }),
     alias({
       entries:[{find: 'src', replacement: path.resolve(__dirname,'src/')}]
@@ -43,7 +43,7 @@ export default (async () => ({
       // we'll extract any component CSS out into
       // a separate file — better for performance
       emitCss: true,
-      extensions: [".svelte", ".md"],
+      extensions: ['.svelte', '.md'],
       preprocess: [
         mdsvex({
           extension:'.md',
@@ -95,8 +95,8 @@ export default (async () => ({
 
     format: 'es',
     sourcemap: !isProduction || 'hidden',
-    entryFileNames: isProduction ? "[name]~[hash].js" : '[name].js',
-    chunkFileNames: isProduction ? "[name]~[hash].js" : '[name].js',
-    assetFileNames: isProduction ? "[name]~[hash].[ext]" : '[name].[ext]'
+    entryFileNames: isProduction ? '[name]~[hash].js' : '[name].js',
+    chunkFileNames: isProduction ? '[name]~[hash].js' : '[name].js',
+    assetFileNames: isProduction ? '[name]~[hash].[ext]' : '[name].[ext]'
   },
 }))();

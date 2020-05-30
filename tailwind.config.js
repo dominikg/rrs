@@ -4,7 +4,7 @@ const {isProduction} = require('./build-constants');
 
 const colorVariables = ['primary','secondary','regular'];
 
-produceColorVariables = function(prefix) {
+function produceColorVariables(prefix) {
   return colorVariables.reduce((map, name) => {
     map[name]=`var(--${prefix ? `${prefix}-`:''}color-${name}${prefix ?`,var(--color-${name})` :''})`;
     const onName = `on-${name}`;
@@ -27,11 +27,11 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [
-          "'Cooper Hewitt'",
+          '\'Cooper Hewitt\'',
           ...defaultTheme.fontFamily.sans,
         ],
         mono: [
-          "'Fira Code'",
+          '\'Fira Code\'',
           ...defaultTheme.fontFamily.sans,
         ]
       }
@@ -39,4 +39,4 @@ module.exports = {
   },
   variants: {},
   plugins: [],
-}
+};

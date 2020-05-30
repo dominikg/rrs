@@ -9,9 +9,6 @@
 </script>
 <style>
   .navbar {
-  }
-
-  .navbar {
     box-shadow: inset 0px -1rem 0.125rem -1rem var(--color-primary);
   }
 

@@ -10,8 +10,12 @@
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "serve": "serve -s",
     "serve:build": "npm run serve -- build",
-    "lint": "eslint src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "run-p lint:code lint:style",
+    "lint:fix": "run-s lint:code:fix lint:style:fix",
+    "lint:style": "stylelint  src/**/*.css src/**/*.scss src/**/*.svelte",
+    "lint:style:fix": "npm run lint:style -- --fix",
+    "lint:code": "eslint src/**/*.svelte src/**/*.js  tools/**/*.js *.js",
+    "lint::code:fix": "npm run lint:code -- --fix"
   },
   "repository": {
     "type": "git",
@@ -45,6 +49,7 @@
     "lint-staged": "^10.2.7",
     "mdsvex": "^0.8.0",
     "micromatch": "^4.0.2",
+    "npm-run-all": "^4.1.5",
     "postcss": "^7.0.31",
     "postcss-import": "^12.0.1",
     "postcss-load-config": "^2.1.0",
@@ -59,6 +64,8 @@
     "rollup-plugin-terser": "^6.1.0",
     "serve": "^11.3.1",
     "shiki": "^0.1.7",
+    "stylelint": "^13.5.0",
+    "stylelint-config-recommended": "^3.0.0",
     "tailwindcss": "^1.4.6",
     "typeface-cooper-hewitt": "^0.0.44",
     "typescript": "^3.9.3"
@@ -79,6 +86,7 @@
     }
   },
   "lint-staged": {
-    "*.(svelte|js)": "./node_modules/.bin/eslint --fix"
+    "*.(svelte|js|ts)": "./node_modules/.bin/eslint --fix",
+    "*.(svelte|scss|css)": "./node_modules/.bin/stylelint --fix"
   }
 }
