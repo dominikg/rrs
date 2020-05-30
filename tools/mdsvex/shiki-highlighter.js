@@ -19,11 +19,16 @@ function escape(str) {
 
 function render(lines, options = {}) {
   const {fg,bg} = options;
+  const lineNumbers = options.showLineNumbers(lines.length,options.lang);
   const lang = options.lang ? `<span class="code-language">${options.lang}</span>` : ''
-  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">${lang}<code>${lines.map(lineRenderer(options)).join('\n')}\n</code></pre>`;
+  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">${lang}<code class="${lineNumbers ? 'numbered':'simple'}">${lines.map(lineRenderer(options)).join('\n')}\n</code></pre>`;
 }
 
-const lineRenderer = options => (line) => line.map(tokenRenderer(options)).join('')
+const lineRenderer = options => (line) => {
+  const output = line.map(tokenRenderer(options)).join('');
+  const {leadingWS,content,trailingWS} = splitLeadingAndTrailingWS(output);
+  return `${leadingWS||''}<span class="line-of-code">${content||''}</span>${trailingWS||''}`
+}
 
 const tokenRenderer = options => (token) => {
   if(!token.color || token.color.toUpperCase() === options.fg) {
@@ -48,7 +53,7 @@ function splitLeadingAndTrailingWS(content) {
 
   if(start === end) {
     return {
-      leadingWS: content
+      leadingWS: content || ''
     }
   }
 
@@ -75,6 +80,7 @@ const defaultOpts = {
   theme: 'nord',
   fg: undefined,
   bg: undefined,
+  showLineNumbers: (numberOfLines,lang)=> numberOfLines > 5
 };
 
 export default async function createHighlighter(opts) {
@@ -92,7 +98,7 @@ export default async function createHighlighter(opts) {
   const bg = (options.bg || getThemeColor("background") || "#222222").toUpperCase() ;
   return getHighlighter(options).then(
     highlighter => (code,lang) =>
-         render(isPlaintext(lang) ? [[{content: code}]] : highlighter.codeToThemedTokens(code,lang),{fg,bg,lang})
+       render(isPlaintext(lang) ? [[{content: code}]] : highlighter.codeToThemedTokens(code, lang), {...options,fg, bg, lang})
   )
 }
 

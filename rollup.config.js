@@ -47,7 +47,7 @@ export default (async () => ({
       preprocess: [
         mdsvex({
           extension:'.md',
-          highlight: {highlighter: await createHighlighter()}
+          highlight: {highlighter: await createHighlighter({showLineNumbers: (numberOfLines,lang)=> numberOfLines > 3 || lang==='ts'})}
         }),
         smartAssetPreprocessor({outputDir: buildDir})
       ]
