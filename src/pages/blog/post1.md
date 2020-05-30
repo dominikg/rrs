@@ -173,7 +173,7 @@ export default async function createHighlighter(opts) {
 ### the css to make it look nice
 
 * wrapping thanks to `white-space: pre-wrap;`
-* consistent indentation and numbering thanks to wrapping each line in a `<span class="line-of-code"></span>` css counters and `display: inline-block`
+* consistent indentation and numbering thanks to wrapping each line in a `<span class="line-of-code"></span>`, css counters and `display: inline-block`
 * numbers are positioned absolutely on the left edge and do not affect copy/paste
 
 ```css

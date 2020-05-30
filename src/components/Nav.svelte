@@ -1,12 +1,11 @@
 <script>
-    import {isActive, url} from '@sveltech/routify'
-    import ThemeSwitch from "./ThemeSwitch.svelte";
+    import {isActive, url} from '@sveltech/routify';
+    import ThemeSwitch from './ThemeSwitch.svelte';
 
     const navitems = [
-        ['./example', 'Routify Examples'],
-        ['./playground', 'Playground'],
-        ['./blog', 'Blog']
-    ]
+      ['./blog', 'Blog'],
+      ['./playground', 'Playground'],
+    ];
 </script>
 <style>
     .navbar {
