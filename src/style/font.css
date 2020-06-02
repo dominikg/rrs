@@ -4,19 +4,16 @@
   font-style: normal;
   font-display: swap;
   font-weight: 100;
-  src: local('Cooper Hewitt Thin normal'),
-    local('Cooper Hewitt-Thinnormal'),
+  src: local('Cooper Hewitt Thin normal'), local('Cooper Hewitt-Thinnormal'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-100.woff2') format('woff2');
 }
-
 
 @font-face {
   font-family: 'Cooper Hewitt';
   font-style: italic;
   font-display: swap;
   font-weight: 100;
-  src: local('Cooper Hewitt Thin italic'),
-    local('Cooper Hewitt-Thinitalic'),
+  src: local('Cooper Hewitt Thin italic'), local('Cooper Hewitt-Thinitalic'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-100italic.woff2') format('woff2');
 }
 
@@ -26,8 +23,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: local('Cooper Hewitt Regular normal'),
-    local('Cooper Hewitt-Regularnormal'),
+  src: local('Cooper Hewitt Regular normal'), local('Cooper Hewitt-Regularnormal'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-400.woff2') format('woff2');
 }
 
@@ -36,8 +32,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: local('Cooper Hewitt Regular italic'),
-    local('Cooper Hewitt-Regularitalic'),
+  src: local('Cooper Hewitt Regular italic'), local('Cooper Hewitt-Regularitalic'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-400italic.woff2') format('woff2');
 }
 
@@ -48,8 +43,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: local('Cooper Hewitt Bold normal'),
-    local('Cooper Hewitt-Boldnormal'),
+  src: local('Cooper Hewitt Bold normal'), local('Cooper Hewitt-Boldnormal'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-600.woff2') format('woff2');
 }
 
@@ -58,8 +52,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: local('Cooper Hewitt Bold italic'),
-    local('Cooper Hewitt-Bolditalic'),
+  src: local('Cooper Hewitt Bold italic'), local('Cooper Hewitt-Bolditalic'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-600italic.woff2') format('woff2');
 }
 
@@ -70,8 +63,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 900;
-  src: local('Cooper Hewitt Bold normal'),
-    local('Cooper Hewitt-Boldnormal'),
+  src: local('Cooper Hewitt Bold normal'), local('Cooper Hewitt-Boldnormal'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-800.woff2') format('woff2');
 }
 
@@ -80,8 +72,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 900;
-  src: local('Cooper Hewitt Bold italic'),
-    local('Cooper Hewitt-Bolditalic'),
+  src: local('Cooper Hewitt Bold italic'), local('Cooper Hewitt-Bolditalic'),
     url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-800italic.woff2') format('woff2');
 }
 

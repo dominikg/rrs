@@ -1,5 +1,5 @@
 <script>
-  import {isActive, url} from '@sveltech/routify';
+  import { isActive, url } from '@sveltech/routify';
   import ThemeSwitch from './ThemeSwitch.svelte';
 
   const navitems = [
@@ -7,6 +7,7 @@
     ['./playground', 'Playground'],
   ];
 </script>
+
 <style>
   .navbar {
     box-shadow: inset 0px -1rem 0.125rem -1rem var(--color-primary);
@@ -27,27 +28,21 @@
   .nav-item:hover {
     @apply border-primary;
   }
-
 </style>
-<nav class="navbar flex items-stretch  pt-2">
+
+<nav class="navbar flex items-stretch pt-2">
   <a href="/" class="flex items-center flex-shrink-0 mr-6">
 
     <svg viewBox="0 0 98.1 118" class="app-logo">
-      <use href="static/favicon.svg#logo"></use>
+      <use href="static/favicon.svg#logo" />
     </svg>
     <span class="text-xl text-primary">A svelte app</span>
 
-
   </a>
   {#each navitems as [path, name]}
-    <a href={$url(path)} class="nav-item" class:active={$isActive(path)}>
-      {name}
-    </a>
+    <a href={$url(path)} class="nav-item" class:active={$isActive(path)}>{name}</a>
   {/each}
   <div class="flex items-center ml-auto mr-4">
-    <ThemeSwitch/>
+    <ThemeSwitch />
   </div>
 </nav>
-
-
-

@@ -12,31 +12,29 @@ import path from 'path';
 import smartAssetPreprocessor from './tools/svelte-preprocessors/smart-asset';
 import routify from '@sveltech/routify/plugins/rollup';
 import livereload from 'rollup-plugin-livereload';
-import {mdsvex} from 'mdsvex';
-import createHighlighter from  './tools/mdsvex/shiki-highlighter';
+import { mdsvex } from 'mdsvex';
+import createHighlighter from './tools/mdsvex/shiki-highlighter';
 
-const { buildDir, isProduction,isDevelopment,buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants');
+const { buildDir, isProduction, isDevelopment, buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants');
 
 export default (async () => ({
-
-  input:['src/style/main.css','src/main.js','static/favicon.svg'], // required
+  input: ['src/style/main.css', 'src/main.js', 'static/favicon.svg'], // required
   plugins: [
-    del({targets: [buildDir],verbose: isDebug, runOnce: isWatch}),
+    del({ targets: [buildDir], verbose: isDebug, runOnce: isWatch }),
     replace({
-      'process.env.NODE_ENV': JSON.stringify( buildMode )
+      'process.env.NODE_ENV': JSON.stringify(buildMode),
     }),
     alias({
-      entries:assetRoots.map(root => ({
+      entries: assetRoots.map((root) => ({
         find: root,
-        replacement:  path.resolve(__dirname,root)
-      }))
+        replacement: path.resolve(__dirname, root),
+      })),
     }),
     alias({
-      entries:[{find: 'src', replacement: path.resolve(__dirname,'src/')}]
+      entries: [{ find: 'src', replacement: path.resolve(__dirname, 'src/') }],
     }),
-    routify({watchDelay: 0}),
+    routify({ watchDelay: 0 }),
     svelte({
-
       // enable run-time checks when not in production
       dev: isDevelopment,
       hydratable: false,
@@ -46,26 +44,29 @@ export default (async () => ({
       extensions: ['.svelte', '.md'],
       preprocess: [
         mdsvex({
-          extension:'.md',
-          highlight: {highlighter: await createHighlighter({showLineNumbers: (numberOfLines,lang)=> numberOfLines > 3 || lang==='ts'})}
+          extension: '.md',
+          highlight: {
+            highlighter: await createHighlighter({ showLineNumbers: (numberOfLines, lang) => numberOfLines > 3 || lang === 'ts' }),
+          },
         }),
-        smartAssetPreprocessor({outputDir: buildDir})
-      ]
-
+        smartAssetPreprocessor({ outputDir: buildDir }),
+      ],
     }),
-    ...assetRoots.map(root => smartAsset({
-      include: `${root}/**/*.(${assetExtensions.join('|')})`,
-      url: 'copy',
-      publicPath: isProduction ? '.' : root,
-      assetsPath: isProduction ? '.' : root,
-      useHash: isProduction,
-      keepName: true,
-      hashOptions: {
-        hash: 'metrohash128',
-        encoding: 'base52',
-        maxLength: 8
-      }
-    })),
+    ...assetRoots.map((root) =>
+      smartAsset({
+        include: `${root}/**/*.(${assetExtensions.join('|')})`,
+        url: 'copy',
+        publicPath: isProduction ? '.' : root,
+        assetsPath: isProduction ? '.' : root,
+        useHash: isProduction,
+        keepName: true,
+        hashOptions: {
+          hash: 'metrohash128',
+          encoding: 'base52',
+          maxLength: 8,
+        },
+      }),
+    ),
     postcss({
       extract: true,
       to: `${buildDir}/main.css`,
@@ -78,18 +79,19 @@ export default (async () => ({
     // https://github.com/rollup/rollup-plugin-commonjs
     resolve({
       browser: true,
-      dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
+      dedupe: (importee) => importee === 'svelte' || importee.startsWith('svelte/'),
     }),
     commonjs(),
     isProduction && (await import('rollup-plugin-terser')).terser(),
-    html({templateData: {title: 'hooray'}}),
-    isWatch && serve({dir:buildDir}),
-    isWatch && livereload()
+    html({ templateData: { title: 'hooray' } }),
+    isWatch && serve({ dir: buildDir }),
+    isWatch && livereload(),
   ],
 
   treeshake: !!isProduction,
   preserveEntrySignatures: false,
-  output: { // required (can be an array, for multiple outputs)
+  output: {
+    // required (can be an array, for multiple outputs)
     // core output options
     dir: `${buildDir}`,
 
@@ -97,6 +99,6 @@ export default (async () => ({
     sourcemap: !isProduction || 'hidden',
     entryFileNames: isProduction ? '[name]~[hash].js' : '[name].js',
     chunkFileNames: isProduction ? '[name]~[hash].js' : '[name].js',
-    assetFileNames: isProduction ? '[name]~[hash].[ext]' : '[name].[ext]'
+    assetFileNames: isProduction ? '[name]~[hash].[ext]' : '[name].[ext]',
   },
 }))();

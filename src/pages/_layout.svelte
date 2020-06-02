@@ -2,6 +2,7 @@
   import Nav from 'src/components/Nav.svelte';
   import Footer from 'src/components/Footer.svelte';
 </script>
+
 <style>
   #app {
     display: grid;
@@ -11,12 +12,11 @@
     grid-gap: 1rem;
   }
 </style>
+
 <div id="app">
-  <Nav/>
+  <Nav />
   <main class="w-full max-w-screen-xl mx-auto px-4">
-    <slot/>
+    <slot />
   </main>
-  <Footer/>
+  <Footer />
 </div>
-
-

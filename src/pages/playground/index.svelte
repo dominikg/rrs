@@ -5,13 +5,13 @@
   let lazy;
 
   function loadLazy() {
-    import('src/components/Lazy.svelte').then(m => lazy = m.default);
+    import('src/components/Lazy.svelte').then((m) => (lazy = m.default));
   }
 </script>
 
 <style>
   .elephant {
-    background-image: url("static/elephant.png"); /* case 2, referenced in css url */
+    background-image: url('static/elephant.png'); /* case 2, referenced in css url */
   }
 
   .btn {
@@ -28,25 +28,26 @@
 </style>
 
 <h1>Image with imported src</h1>
-<img alt="penguin" src={penguin}>
+<img alt="penguin" src={penguin} />
 <h1>Div with css background</h1>
-<div class="elephant"></div>
+<div class="elephant" />
 <h1>Image with static src</h1>
-<img alt="cat" src="static/cat.png"/> <!-- case 3, hardcoded in template -->
+<img alt="cat" src="static/cat.png" />
+<!-- case 3, hardcoded in template -->
 <h1>svg with imported use href</h1>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <use xlink:href={`${account_plus}#mdi-account-plus`}></use>
+  <use xlink:href={`${account_plus}#mdi-account-plus`} />
 </svg>
 <h1>svg with static use href</h1>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <use xlink:href="node_modules/@mdi/svg/svg/account-plus.svg#mdi-account-plus"></use>
+  <use xlink:href="node_modules/@mdi/svg/svg/account-plus.svg#mdi-account-plus" />
 </svg>
 
 <button class="btn btn-blue" on:click={loadLazy}>loadLazy</button>
-<svelte:component this={lazy}></svelte:component>
+<svelte:component this={lazy} />
 
 <h1>Images with static src which should not be processed by smart-asset</h1>
-<img alt="x" src="http://foo.com/bar.jpg"/>
-<img alt="x" src="https://foo.com/bar.jpg"/>
-<img alt="x" src="//foo.com/bar.jpg"/>
-<img alt="x" src="foo.com/bar.jpg"/>
+<img alt="x" src="http://foo.com/bar.jpg" />
+<img alt="x" src="https://foo.com/bar.jpg" />
+<img alt="x" src="//foo.com/bar.jpg" />
+<img alt="x" src="foo.com/bar.jpg" />

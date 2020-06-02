@@ -25,7 +25,7 @@
     const body = document.body;
     body.classList.add('transition-colors', 'ease-in-out', 'duration-500');
     body.classList.remove(`theme-${theme}`);
-    theme = (theme === 'dark' ? 'light' : 'dark');
+    theme = theme === 'dark' ? 'light' : 'dark';
     body.classList.add(`theme-${theme}`);
     window.localStorage.setItem('theme', theme);
     themeColor = getThemeColor();
@@ -36,6 +36,7 @@
     body.addEventListener('transitionend', onTransitionEnd);
   }
 </script>
+
 <style>
   .themeswitch {
     cursor: pointer;
@@ -44,13 +45,15 @@
     fill: var(--color-primary);
   }
 </style>
+
 <svg class="themeswitch" on:click={toggleTheme} viewBox="0 0 24 24">
-  {#if theme === 'light' }
-    <use href="node_modules/@mdi/svg/svg/lightbulb-off-outline.svg#mdi-lightbulb-off-outline"></use>
+  {#if theme === 'light'}
+    <use href="node_modules/@mdi/svg/svg/lightbulb-off-outline.svg#mdi-lightbulb-off-outline" />
   {:else}
-    <use href="node_modules/@mdi/svg/svg/lightbulb-on-outline.svg#mdi-lightbulb-on-outline"></use>
-  {/if}}
+    <use href="node_modules/@mdi/svg/svg/lightbulb-on-outline.svg#mdi-lightbulb-on-outline" />
+  {/if}
+  }
 </svg>
 <svelte:head>
-  <meta name="theme-color" content="{themeColor}">
+  <meta name="theme-color" content={themeColor} />
 </svelte:head>

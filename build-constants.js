@@ -1,7 +1,7 @@
 const path = require('path');
-const buildDir = path.resolve(__dirname,'build');
-const assetRoots = ['static','node_modules'];
-const assetExtensions = ['png','jpg','jpeg','gif','ico','svg','woff2'];
+const buildDir = path.resolve(__dirname, 'build');
+const assetRoots = ['static', 'node_modules'];
+const assetExtensions = ['png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'woff2'];
 const buildMode = process.env.NODE_ENV || 'development';
 const isProduction = buildMode === 'production';
 const isDevelopment = !isProduction;
