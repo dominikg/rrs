@@ -4,6 +4,7 @@ import { getTheme, loadTheme } from 'shiki-themes';
 const escapeChars = {
   '<': '&lt;',
   '>': '&gt;',
+  '&': '&amp;',
   '{': '&#123;',
   '}': '&#125;',
 };
@@ -14,10 +15,10 @@ function escape(str) {
   if (str && str.length !== 0) {
     return str.replace(escapeRE, (c) => escapeChars[c]);
   }
-  return str;
+  return '';
 }
 
-function render(lines, options = {}) {
+function render(lines, options) {
   const { fg, bg } = options;
   const lineNumbers = options.showLineNumbers(lines.length, options.lang);
   const lang = options.lang ? `<span class="code-language">${options.lang}</span>` : '';
