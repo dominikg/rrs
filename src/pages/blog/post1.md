@@ -33,7 +33,7 @@ const str2 = 'me too';
 const str3 = "i'm" + 'just' + `${here()}` + ((to) => show.off({ some: 'syntax', to })(str));
 const lorem =
   'Consectetur eum unde fugit autem delectus aut ipsum. Error numquam ducimus impedit ut Consectetur eum unde fugit autem delectus aut ipsum. Error numquam ducimus impedit ut';
-function lorem() {
+function loremFn() {
   return 'Consectetur eum unde fugit autem delectus aut ipsum. Error numquam ducimus impedit ut Consectetur eum unde fugit autem delectus aut ipsum. Error numquam ducimus impedit ut';
 }
 ```

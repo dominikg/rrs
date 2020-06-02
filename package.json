@@ -11,12 +11,12 @@
     "serve": "serve -s",
     "serve:build": "npm run serve -- build",
     "lint": "run-p lint:script lint:style",
-    "lint:script": "eslint --ignore-path .gitignore '**/*.{js,ts,svelte}'",
-    "lint:style": "stylelint --ignore-path .gitignore '**/*.{html,js,ts,md,css,scss,svelte}'",
+    "lint:script": "eslint --ignore-path .gitignore '**/*.{js,ts,svelte,html,md}'",
+    "lint:style": "stylelint --ignore-path .gitignore '**/*.{css,scss,svelte,html,js,ts,md}'",
     "lint:fix": "run-s lint:fix:script lint:fix:style",
     "lint:fix:script": "npm run lint:script -- --fix",
     "lint:fix:style": "npm run lint:style -- --fix",
-    "format": "prettier --ignore-path .gitignore '**/*.{html,md,js,ts,css,scss,svelte}' --check",
+    "format": "prettier --ignore-path .gitignore '**/*.{css,scss,svelte,html,js,ts,md}' --check",
     "format:fix": "npm run format -- --write"
   },
   "repository": {
@@ -45,7 +45,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-markdown": "^1.0.2",
     "eslint-plugin-svelte3": "^2.7.3",
     "firacode": "^4.0.0",
     "husky": "^4.2.5",
@@ -92,8 +94,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,svelte}": "./node_modules/.bin/eslint --fix",
-    "*.{css,scss,svelte}": "./node_modules/.bin/stylelint --fix",
-    "*.{html,md,js,ts,css,scss,svelte}": "./node_modules/.bin/prettier --write"
+    "*.{js,ts,svelte,html,md}": "./node_modules/.bin/eslint --fix",
+    "*.{css,scss,svelte,html,js,ts,md}": [
+      "./node_modules/.bin/stylelint --fix",
+      "./node_modules/.bin/prettier --write"
+    ]
   }
 }

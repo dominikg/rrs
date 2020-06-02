@@ -20,7 +20,9 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "svelte3"
+    "svelte3",
+    "html",
+    "markdown"
   ],
   "overrides": [
     {
@@ -31,6 +33,15 @@
         "import/no-duplicates": "off",
         "import/no-mutable-exports": "off",
         "import/no-unresolved": "off"
+      }
+    },
+    {
+      "files": ["**/*.md"],
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "padded-blocks": "off"
       }
     }
   ]
