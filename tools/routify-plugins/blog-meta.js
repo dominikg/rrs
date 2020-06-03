@@ -32,15 +32,14 @@ const adder = (middlewares, options) => (builder) => {
     return;
   }
   if (middlewares.find((mw) => mw.name === blogMiddleware.name)) {
-    throw new Error(`Middleware named ${blogMiddleware.name} already exists`);
+    throw new Error(`Middleware to insert named ${blogMiddleware.name} already exists`);
   }
   const index = middlewares.findIndex((mw) => mw.name === blogMiddleware.after);
-  const { name, middleware } = blogMiddleware;
-  if (index > -1 && index < middlewares.length - 1) {
-    middlewares.splice(index + 1, 0, { name, middleware });
-  } else {
-    middlewares.push({ name, middleware });
+  if (index === -1) {
+    throw new Error(`Middleware to insert after named ${blogMiddleware.after} not found`);
   }
+  const { name, middleware } = blogMiddleware;
+  middlewares.splice(index + 1, 0, { name, middleware });
 };
 
 let blogNode; // cache for blog, we're working with this in different middlewares, no need to search for it every time
@@ -92,7 +91,7 @@ const grayMatterOptions = (options) => {
 
 const frontmatterParser = (options) => ({
   name: 'blog-meta-frontmatter',
-  after: 'applyMetaTofiles',
+  after: 'applyMetaToFiles',
   middleware: async () => {
     const posts = blogNode.children.filter((child) => child.isBlogPost);
 
