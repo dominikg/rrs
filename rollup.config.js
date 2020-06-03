@@ -15,7 +15,17 @@ import livereload from 'rollup-plugin-livereload';
 import { mdsvex } from 'mdsvex';
 import createHighlighter from './tools/mdsvex/shiki-highlighter';
 
-const { buildDir, isProduction, isDevelopment, buildMode, isWatch, isDebug, assetRoots, assetExtensions } = require('./build-constants');
+const {
+  rootDir,
+  buildDir,
+  isProduction,
+  isDevelopment,
+  buildMode,
+  isWatch,
+  isDebug,
+  assetRoots,
+  assetExtensions,
+} = require('./build-constants');
 
 export default (async () => ({
   input: ['src/style/main.css', 'src/main.js', 'static/favicon.svg'], // required
@@ -25,14 +35,16 @@ export default (async () => ({
       'process.env.NODE_ENV': JSON.stringify(buildMode),
     }),
     alias({
-      entries: assetRoots.map((root) => ({
-        find: root,
-        replacement: path.resolve(__dirname, root),
-      })),
+      entries: [
+        ...assetRoots.map((assetRoot) => ({
+          find: assetRoot,
+          replacement: path.resolve(rootDir, assetRoot),
+        })),
+        { find: 'src', replacement: path.resolve(rootDir, 'src/') },
+        { find: '~', replacement: rootDir },
+      ],
     }),
-    alias({
-      entries: [{ find: 'src', replacement: path.resolve(__dirname, 'src/') }],
-    }),
+
     routify({ watchDelay: 0 }),
     svelte({
       // enable run-time checks when not in production

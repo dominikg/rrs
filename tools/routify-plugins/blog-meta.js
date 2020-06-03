@@ -119,27 +119,24 @@ const filterPosts = (options) => ({
   },
 });
 
-const setSortIndex = (options) => ({
+const sortBlog = (options) => ({
   name: 'blog-meta-sorter',
   after: 'blog-meta-frontmatter',
   middleware: () => {
-    // set meta.index
     blogNode.children
-      .filter((child) => child.isBlogPost)
-      .sort(options.sort)
-      .map((post, i) => (post.meta.index = i + 1));
-
-    // sort it
-    blogNode.children.sort((a, b) => {
-      if (a.isBlogPost && b.isBlogPost) {
-        return options.sort(a, b);
-      } else if (a.isBlogPost) {
-        return 1;
-      } else if (b.isBlogPost) {
-        return -1;
-      }
-      return 0;
-    });
+      .sort((a, b) => {
+        if (a.isBlogPost && b.isBlogPost) {
+          return options.sort(a, b);
+        } else if (a.isBlogPost) {
+          return 1;
+        } else if (b.isBlogPost) {
+          return -1;
+        }
+        return 0;
+      })
+      .map((child, i) => {
+        child.meta ? (child.meta.index = i + 1) : (child.meta = { index: i + 1 });
+      });
   },
 });
 
@@ -149,11 +146,10 @@ module.exports = function (middlewares, pl, opts) {
   addMiddleware(findBlog);
   addMiddleware(frontmatterParser);
   if (options.sort) {
-    addMiddleware(setSortIndex);
+    addMiddleware(sortBlog);
   }
   if (options.filter) {
     addMiddleware(filterPosts);
   }
-
   return middlewares;
 };

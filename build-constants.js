@@ -1,5 +1,6 @@
 const path = require('path');
-const buildDir = path.resolve(__dirname, 'build');
+const rootDir = path.resolve(__dirname);
+const buildDir = path.resolve(rootDir, 'build');
 const assetRoots = ['static', 'node_modules'];
 const assetExtensions = ['png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'woff2'];
 const buildMode = process.env.NODE_ENV || 'development';
@@ -10,6 +11,7 @@ const isDebug = !!process.env.DEBUG;
 
 module.exports = {
   buildMode,
+  rootDir,
   buildDir,
   assetRoots,
   assetExtensions,
