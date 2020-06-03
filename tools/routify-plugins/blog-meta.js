@@ -22,7 +22,7 @@ const defaultOpts = {
   // tag: true,
   // author: true,
   //  }
-  // slug: true, // create safe slug from title
+  slugify: true, // create safe slug from title
   // readingTime: true,  // TODO add reading-time
 };
 
@@ -105,6 +105,9 @@ const frontmatterParser = (options) => ({
           if (fm.excerpt) {
             post.meta[options.metaKey].excerpt = fm.excerpt;
           }
+          if (fm.data.title) {
+            post.meta.title = fm.data.title;
+          }
         }),
       );
     }
@@ -140,6 +143,19 @@ const sortBlog = (options) => ({
   },
 });
 
+const slugTitle = (options) => ({
+  name: 'blog-meta-slugify',
+  after: 'addPath',
+  middleware: () => {
+    const slugify = typeof options.slugify === 'function' ? options.slugify : require('@sindresorhus/slugify');
+    blogNode.children.forEach((child) => {
+      if (child.isBlogPost && child.meta.title) {
+        child.path = options.path + '/' + slugify(child.meta.title);
+      }
+    });
+  },
+});
+
 module.exports = function (middlewares, pl, opts) {
   const options = { ...defaultOpts, ...opts };
   const addMiddleware = adder(middlewares, options);
@@ -150,6 +166,9 @@ module.exports = function (middlewares, pl, opts) {
   }
   if (options.filter) {
     addMiddleware(filterPosts);
+  }
+  if (options.slugify) {
+    addMiddleware(slugTitle);
   }
   return middlewares;
 };

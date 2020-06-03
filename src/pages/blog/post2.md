@@ -1,5 +1,5 @@
 ---
-title: post2
+title: This is post 2
 published: 2020-06-01
 author: Dominik G
 tags:

@@ -1,5 +1,5 @@
 ---
-title: post3
+title: Ümlauts are slügifyied Öh Yeäh
 published: 2020-06-01
 author: Dominik G
 tags:
