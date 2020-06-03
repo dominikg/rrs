@@ -1,7 +1,7 @@
 const defaultOpts = {
   path: '/blog', // root path for blog
   extensions: ['md'], // extensions used for posts (must be subset of routify extensions)
-
+  requiredMeta: ['title', 'author', 'published'],
   sort: (postA, postB) => {
     const a = postA.meta.blog.published;
     const b = postB.meta.blog.published;
@@ -22,8 +22,8 @@ const defaultOpts = {
   // tag: true,
   // author: true,
   //  }
-  slugify: true, // create safe slug from title
-  // readingTime: true,  // TODO add reading-time
+  slugify: true, // boolean | str => slug function
+  readingTime: true,
 };
 
 const adder = (middlewares, options) => (builder) => {
@@ -98,15 +98,29 @@ const frontmatterParser = (options) => ({
     if (posts && posts.length) {
       const matter = require('gray-matter');
       const matterOptions = grayMatterOptions(options);
+      let readingTime;
+      if (options.readingTime) {
+        readingTime = require('reading-time');
+      }
       await Promise.all(
         posts.map((post) => {
           const fm = matter.read(post.absolutePath, matterOptions);
+          if (options.requiredMeta) {
+            for (let required of options.requiredMeta) {
+              if (fm.data[required] == null) {
+                throw new Error(`file ${post.absolutePath} is missing ${required} in frontmatter`);
+              }
+            }
+          }
           post.meta[options.metaKey] = fm.data;
           if (fm.excerpt) {
             post.meta[options.metaKey].excerpt = fm.excerpt;
           }
           if (fm.data.title) {
             post.meta.title = fm.data.title;
+          }
+          if (options.readingTime) {
+            post.meta[options.metaKey].readingTime = readingTime(fm.content);
           }
         }),
       );

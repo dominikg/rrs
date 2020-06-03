@@ -65,6 +65,7 @@
     "postcss-smart-asset": "^1.0.5",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
+    "reading-time": "^1.2.0",
     "rollup": "^2.12.1",
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-livereload": "^1.3.0",
