@@ -1,7 +1,7 @@
 ---
 author: Dominik G
 title: Welcome to the blog
-published: '2020-05-27'
+published: 2020-06-27
 ---
 
 # {title}
