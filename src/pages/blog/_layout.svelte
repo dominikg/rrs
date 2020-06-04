@@ -1,28 +1,36 @@
 <script>
-  import { url, layout, page } from '@sveltech/routify';
+  import { layout, page } from '@sveltech/routify';
+  import BlogPost from '~/src/components/BlogPost.svelte';
+  import BlogCard from '../../components/BlogCard.svelte';
 
-  let next, prev;
-  $: if ($page) next = prev = false; //reset
-  $: findSiblings($page); //update buttons on page change
-  function findSiblings(node) {
+  let current, next, prev, isIndex;
+  $: if ($page) {
+    next = prev = current = false;
+    isIndex = true;
+  } //reset
+  $: update($page); //update buttons on page change
+  function update(node) {
     prev = prev || node.prev;
     next = next || node.next;
+    current = node;
     // make sure we have a parent and that we're not travelling past our layout
-    if (node.parent && node.parent !== $layout.parent) findSiblings(node.parent);
+    if (node.parent && node.parent !== $layout.parent) update(node.parent);
+    isIndex = node.path.endsWith('/index');
   }
 </script>
 
-<div class="c-pagination">
-
-  {#if prev}
-    <a href={$url(prev.path)}>Previous: {prev.title}</a>
-  {/if}
-
-  {#if next}
-    <a href={$url(next.path)}>Next: {next.title}</a>
-  {/if}
-</div>
-
-<div class="blogpost">
+{#if isIndex}
   <slot />
-</div>
+{:else}
+  <BlogPost post={current}>
+    <slot />
+  </BlogPost>
+  <div class="flex justify-around">
+    {#if prev}
+      <BlogCard post={prev} showTitle label="Previous post" />
+    {/if}
+    {#if next}
+      <BlogCard post={next} showTitle label="Next post" />
+    {/if}
+  </div>
+{/if}

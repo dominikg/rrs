@@ -130,7 +130,7 @@ const parser = (options) => ({
 
 const filterPosts = (options) => ({
   name: 'blog-meta-filter',
-  after: parser.name,
+  after: 'blog-meta-parser',
   middleware: () => {
     blogNode.children = blogNode.children.filter((child) => !child.isBlogPost || options.filter(child));
   },
@@ -138,7 +138,7 @@ const filterPosts = (options) => ({
 
 const sortBlog = (options) => ({
   name: 'blog-meta-sorter',
-  after: parser.name,
+  after: 'blog-meta-parser',
   middleware: () => {
     blogNode.children
       .sort((a, b) => {
