@@ -89,8 +89,8 @@ const grayMatterOptions = (options) => {
   return result;
 };
 
-const frontmatterParser = (options) => ({
-  name: 'blog-meta-frontmatter',
+const parser = (options) => ({
+  name: 'blog-meta-parser',
   after: 'applyMetaToFiles',
   middleware: async () => {
     const posts = blogNode.children.filter((child) => child.isBlogPost);
@@ -130,7 +130,7 @@ const frontmatterParser = (options) => ({
 
 const filterPosts = (options) => ({
   name: 'blog-meta-filter',
-  after: 'blog-meta-frontmatter',
+  after: parser.name,
   middleware: () => {
     blogNode.children = blogNode.children.filter((child) => !child.isBlogPost || options.filter(child));
   },
@@ -138,7 +138,7 @@ const filterPosts = (options) => ({
 
 const sortBlog = (options) => ({
   name: 'blog-meta-sorter',
-  after: 'blog-meta-frontmatter',
+  after: parser.name,
   middleware: () => {
     blogNode.children
       .sort((a, b) => {
@@ -174,7 +174,7 @@ module.exports = function (middlewares, pl, opts) {
   const options = { ...defaultOpts, ...opts };
   const addMiddleware = adder(middlewares, options);
   addMiddleware(findBlog);
-  addMiddleware(frontmatterParser);
+  addMiddleware(parser);
   if (options.sort) {
     addMiddleware(sortBlog);
   }
