@@ -27,7 +27,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["'Cooper Hewitt'", ...defaultTheme.fontFamily.sans],
-        mono: ["'Fira Code'", ...defaultTheme.fontFamily.sans],
+        mono: ["'Fira Code'", ...defaultTheme.fontFamily.mono],
       },
     },
   },
