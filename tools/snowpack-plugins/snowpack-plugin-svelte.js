@@ -2,24 +2,23 @@ const svelte = require('svelte/compiler');
 const fs = require('fs');
 const path = require('path');
 
-async function buildSvelteConfig(config, pluginOptions, isDev) {
+async function buildSvelteConfig(config, pluginOptions) {
   let compilerOptions;
   let preprocessors;
   const userSvelteConfigLoc = path.join(process.cwd(), 'svelte.config.js');
   if (fs.existsSync(userSvelteConfigLoc)) {
-    const userSvelteConfig = require(userSvelteConfigLoc);
-
+    let userSvelteConfig = require(userSvelteConfigLoc);
+    userSvelteConfig = userSvelteConfig.snowpack || userSvelteConfig;
     const { preprocess, ..._svelteOptions } = typeof userSvelteConfig === 'function' ? await userSvelteConfig() : userSvelteConfig;
     preprocessors = preprocess;
     compilerOptions = _svelteOptions;
   }
 
   compilerOptions = {
-    dev: isDev,
-    css: true,
     ...compilerOptions,
     ...pluginOptions,
   };
+
   return {
     compilerOptions,
     preprocessors,
@@ -27,20 +26,13 @@ async function buildSvelteConfig(config, pluginOptions, isDev) {
 }
 
 module.exports = function plugin(config, pluginOptions) {
-  let buildConfigPromise;
-  let svelteConfig;
+  const buildConfigPromise = buildSvelteConfig(config, pluginOptions);
   return {
     defaultBuildScript: 'build:svelte,svx',
     knownEntrypoints: ['svelte/internal'],
-    async build({ contents, filePath, isDev }) {
-      if (!svelteConfig) {
-        if (!buildConfigPromise) {
-          buildConfigPromise = buildSvelteConfig(config, pluginOptions, isDev).then((cfg) => (svelteConfig = cfg));
-        }
-        await buildConfigPromise;
-      }
+    async build({ contents, filePath }) {
+      const svelteConfig = await buildConfigPromise;
       const { compilerOptions, preprocessors } = svelteConfig;
-
       let codeToCompile = contents;
       // PRE-PROCESS
       if (preprocessors) {

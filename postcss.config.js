@@ -22,10 +22,7 @@ module.exports = {
     //require('postcss-smart-asset')(smartAssetsCfg),
     require('tailwindcss')('./tailwind.config.js'),
     require('postcss-preset-env')({ stage: 1 }),
-    isProduction &&
-      require('cssnano')({
-        preset: ['default', { discardComments: { removeAll: true } }],
-      }),
+    isProduction && require('postcss-csso')({ comments: false }),
   ],
   smartAssetsCfg,
 };

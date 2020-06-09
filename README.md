@@ -1,12 +1,17 @@
-# An attempt at building a svelte Application with filename hashing
+# An attempt at building a svelte routify application with snowpack
 
 ## usage
 
+```shell script
+npm install #install dependencies
+npm start #start dev server
+npm run build # build
+
 ```
-npm install
-npm run build:prod
-npx serve build
-```
+
+---
+
+## !!! Warning, work in progress !!!
 
 ## Goal
 
@@ -16,7 +21,7 @@ All javascript, css and asset outputs should contain a hash in their filename to
 
 ## index.html
 
-References js and css files, needs favicon and possibly other more data (title etv)
+References js and css files, needs favicon and possibly other meta data (title etc)
 
 > ##### Solution
 >
