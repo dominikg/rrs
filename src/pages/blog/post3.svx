@@ -1,6 +1,6 @@
 ---
 title: Ümlauts are slügifyied Öh Yeäh
-published: 2020-06-01
+published: 2020-06-03
 author: Dominik G
 tags:
   - foo

@@ -1,22 +1,18 @@
 <script>
-  import { layout, page } from '@sveltech/routify';
-  import BlogPost from '~/src/components/BlogPost.svelte';
-  import BlogCard from '../../components/BlogCard.svelte';
+  import { page } from '@sveltech/routify/runtime';
+  import BlogPost from 'src/components/BlogPost.svelte';
+  import BlogCard from 'src/components/BlogCard.svelte';
 
   let current, next, prev, isIndex;
-  $: if ($page) {
-    next = prev = current = false;
-    isIndex = true;
-  } //reset
+
   $: update($page); //update buttons on page change
-  function update(node) {
-    prev = prev || node.prev;
-    next = next || node.next;
-    current = node;
-    // make sure we have a parent and that we're not travelling past our layout
-    if (node.parent && node.parent !== $layout.parent) update(node.parent);
-    isIndex = node.path.endsWith('/index');
+  function update(page) {
+    prev = page.prev;
+    next = page.next;
+    current = page;
+    isIndex = page.path.endsWith('/index');
   }
+  update($page);
 </script>
 
 {#if isIndex}
@@ -26,11 +22,17 @@
     <slot />
   </BlogPost>
   <div class="flex justify-around">
-    {#if prev}
-      <BlogCard post={prev} showTitle label="Previous post" />
+    {#if prev && prev.meta.blog}
+      <div class="flex flex-col">
+        <div>Previous post</div>
+        <BlogCard post={prev} showTitle />
+      </div>
     {/if}
-    {#if next}
-      <BlogCard post={next} showTitle label="Next post" />
+    {#if next && next.meta.blog}
+      <div class="flex flex-col">
+        <div>Next post</div>
+        <BlogCard post={next} showTitle />
+      </div>
     {/if}
   </div>
 {/if}

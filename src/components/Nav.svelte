@@ -1,6 +1,7 @@
 <script>
-  import { isActive, url } from '@sveltech/routify';
+  import { isActive, url } from '@sveltech/routify/runtime';
   import ThemeSwitch from './ThemeSwitch.svelte';
+  import favicon from 'static/favicon.svg';
 
   const navitems = [
     ['./blog', 'Blog'],
@@ -34,7 +35,7 @@
   <a href="/" class="flex items-center flex-shrink-0 mr-6">
 
     <svg viewBox="0 0 98.1 118" class="app-logo">
-      <use href="static/favicon.svg#logo" />
+      <use href="{favicon}#logo" />
     </svg>
     <span class="text-xl text-primary">A svelte app</span>
 

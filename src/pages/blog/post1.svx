@@ -1,7 +1,7 @@
 ---
 author: Dominik G
 title: Welcome to the blog
-published: 2020-06-27
+published: 2020-06-01
 ---
 
 # {title}
@@ -11,7 +11,6 @@ Hi, you are reading a post created with mdsvex, featuring a custom highlighter u
 ## How to install
 
 ```js
-import createHighlighter from './tools/mdsvex/shiki-highlighter';
 mdsvex({
   extension: '.md',
   highlight: {
@@ -24,8 +23,7 @@ mdsvex({
 
 ### line numbering and wrapping
 
-Check out the following code block and see if you can spot what's going on.
-Resize your browser to give it a test
+
 
 ```js
 const str = `i'm short`;

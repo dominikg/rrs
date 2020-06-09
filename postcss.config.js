@@ -19,7 +19,7 @@ const smartAssetsCfg = assetRoots.map((root) => ({
 module.exports = {
   plugins: [
     require('postcss-import'),
-    require('postcss-smart-asset')(smartAssetsCfg),
+    //require('postcss-smart-asset')(smartAssetsCfg),
     require('tailwindcss')('./tailwind.config.js'),
     require('postcss-preset-env')({ stage: 1 }),
     isProduction &&

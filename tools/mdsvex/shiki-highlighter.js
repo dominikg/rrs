@@ -1,5 +1,5 @@
-import { getHighlighter } from 'shiki';
-import { getTheme, loadTheme } from 'shiki-themes';
+const { getHighlighter } = require('shiki');
+const { getTheme, loadTheme } = require('shiki-themes');
 
 const escapeChars = {
   '<': '&lt;',
@@ -86,7 +86,7 @@ const defaultOpts = {
   showLineNumbers: (numberOfLines) => numberOfLines > 5,
 };
 
-export default async function createHighlighter(opts) {
+async function createHighlighter(opts) {
   const options = { ...defaultOpts, ...opts };
 
   if (options.theme.endsWith('.json')) {
@@ -103,3 +103,7 @@ export default async function createHighlighter(opts) {
     render(isPlaintext(lang) ? [[{ content: code }]] : highlighter.codeToThemedTokens(code, lang), { ...options, fg, bg, lang }),
   );
 }
+
+module.exports = {
+  createHighlighter,
+};

@@ -5,7 +5,7 @@
   font-display: swap;
   font-weight: 100;
   src: local('Cooper Hewitt Thin normal'), local('Cooper Hewitt-Thinnormal'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-100.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-100.woff2') format('woff2');
 }
 
 @font-face {
@@ -14,7 +14,7 @@
   font-display: swap;
   font-weight: 100;
   src: local('Cooper Hewitt Thin italic'), local('Cooper Hewitt-Thinitalic'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-100italic.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-100italic.woff2') format('woff2');
 }
 
 /* sans 400 */
@@ -24,7 +24,7 @@
   font-display: swap;
   font-weight: 400;
   src: local('Cooper Hewitt Regular normal'), local('Cooper Hewitt-Regularnormal'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-400.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-400.woff2') format('woff2');
 }
 
 @font-face {
@@ -33,7 +33,7 @@
   font-display: swap;
   font-weight: 400;
   src: local('Cooper Hewitt Regular italic'), local('Cooper Hewitt-Regularitalic'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-400italic.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-400italic.woff2') format('woff2');
 }
 
 /* sans 700 */
@@ -44,7 +44,7 @@
   font-display: swap;
   font-weight: 700;
   src: local('Cooper Hewitt Bold normal'), local('Cooper Hewitt-Boldnormal'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-600.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-600.woff2') format('woff2');
 }
 
 @font-face {
@@ -53,7 +53,7 @@
   font-display: swap;
   font-weight: 700;
   src: local('Cooper Hewitt Bold italic'), local('Cooper Hewitt-Bolditalic'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-600italic.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-600italic.woff2') format('woff2');
 }
 
 /* sans 900 */
@@ -64,7 +64,7 @@
   font-display: swap;
   font-weight: 900;
   src: local('Cooper Hewitt Bold normal'), local('Cooper Hewitt-Boldnormal'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-800.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-800.woff2') format('woff2');
 }
 
 @font-face {
@@ -73,13 +73,13 @@
   font-display: swap;
   font-weight: 900;
   src: local('Cooper Hewitt Bold italic'), local('Cooper Hewitt-Bolditalic'),
-    url('node_modules/typeface-cooper-hewitt/files/cooper-hewitt-800italic.woff2') format('woff2');
+    url('typeface-cooper-hewitt/files/cooper-hewitt-800italic.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Fira Code';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-Light.woff2') format('woff2');
+  src: url('firacode/distr/woff2/FiraCode-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
@@ -87,7 +87,7 @@
 @font-face {
   font-family: 'Fira Code';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-Regular.woff2') format('woff2');
+  src: url('firacode/distr/woff2/FiraCode-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
@@ -95,7 +95,7 @@
 @font-face {
   font-family: 'Fira Code';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-Medium.woff2') format('woff2');
+  src: url('firacode/distr/woff2/FiraCode-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }
@@ -103,7 +103,7 @@
 @font-face {
   font-family: 'Fira Code';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-SemiBold.woff2') format('woff2');
+  src: url('firacode/distr/woff2/FiraCode-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
 }
@@ -111,7 +111,7 @@
 @font-face {
   font-family: 'Fira Code';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-Bold.woff2') format('woff2');
+  src: url('firacode/distr/woff2/FiraCode-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -119,7 +119,7 @@
 @font-face {
   font-family: 'Fira Code VF';
   font-display: swap;
-  src: url('node_modules/firacode/distr/woff2/FiraCode-VF.woff2') format('woff2-variations');
+  src: url('firacode/distr/woff2/FiraCode-VF.woff2') format('woff2-variations');
   /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
   font-weight: 300 700;
   font-style: normal;

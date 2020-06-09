@@ -1,6 +1,6 @@
 const defaultOpts = {
   path: '/blog', // root path for blog
-  extensions: ['md'], // extensions used for posts (must be subset of routify extensions)
+  extensions: ['svx'], // extensions used for posts (must be subset of routify extensions)
   requiredMeta: ['title', 'author', 'published'],
   sort: (postA, postB) => {
     const a = postA.meta.blog.published;

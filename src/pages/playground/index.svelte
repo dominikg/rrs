@@ -1,6 +1,6 @@
 <script>
   import penguin from 'static/penguin.png'; // case 1, imported in script
-  import account_plus from 'node_modules/@mdi/svg/svg/account-plus.svg';
+  import account_plus from '@mdi/svg/svg/account-plus.svg';
 
   let lazy;
 

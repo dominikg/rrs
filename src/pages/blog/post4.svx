@@ -1,10 +1,10 @@
 ---
-title: This is post 2
-published: 2020-06-01
+title: this is post 4
+published: 2020-06-30
 author: Dominik G
 tags:
-  - foo
-  - bar
+  - baz
+  - zoink
 ---
 
 <script>
@@ -15,7 +15,7 @@ let tagslist = tags.join(' ');
 
 <!-- excerpt:start -->
 
-This is post2 tagged {tagslist}
+This is post4 tagged {tagslist}
 
 <!-- excerpt:end -->
 
