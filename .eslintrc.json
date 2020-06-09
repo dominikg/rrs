@@ -36,7 +36,17 @@
       }
     },
     {
-      "files": ["**/*.md"],
+      "files": ["**/*.svx","**/*.md"],
+      "processor": "markdown/markdown",
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "padded-blocks": "off"
+      }
+    },
+    {
+      "files": ["**/*.svx/*.**","**/*.md/*.**"],
       "rules": {
         "no-undef": "off",
         "no-unused-vars": "off",
