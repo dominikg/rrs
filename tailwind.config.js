@@ -17,8 +17,9 @@ const colors = produceColorVariables();
 const backgroundColor = produceColorVariables('background');
 const borderColor = produceColorVariables('border');
 const textColor = produceColorVariables('text');
+
 module.exports = {
-  purge: isProduction && ['./src/**/*.svelte', './src/**/*.html', './src/**/*.ejs', './src/**/*.css'],
+  purge: isProduction && ['./src/**/*.svelte', './src/**/*.html', './src/**/*.ejs', './src/**/*.css', './public/index.html'],
   theme: {
     colors: colors,
     backgroundColor,

@@ -6,7 +6,6 @@ module.exports = {
     'mount:routify': 'mount .routify',
     'run:routify': 'routify run --routify-dir .routify -D -b',
     'run:routify::watch': '$1 -b false',
-
     'build:css': 'postcss',
   },
   plugins: ['@snowpack/plugin-dotenv', './tools/snowpack-plugins/snowpack-plugin-svelte'],

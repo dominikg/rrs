@@ -1,6 +1,6 @@
 <script>
   import bulbOff from '@mdi/svg/svg/lightbulb-off-outline.svg';
-  import bulbOn from '@mdi/svg/svg/lightbulb-off-outline.svg';
+  import bulbOn from '@mdi/svg/svg/lightbulb-on-outline.svg';
   const bulbOffIcon = bulbOff + '#mdi-lightbulb-off-outline';
   const bulbOnIcon = bulbOn + '#mdi-lightbulb-on-outline';
   let theme = getInitialTheme();

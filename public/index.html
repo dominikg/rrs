@@ -7,8 +7,18 @@
     <meta name="description" content="Web site created using create-snowpack-app" />
     <title>Snowpack App</title>
   </head>
-  <body>
+  <body class="font-sans text-on-regular border-on-regular bg-regular">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="application/javascript">
+      (function () {
+        if (window && document) {
+          const t = window.localStorage.getItem('theme');
+          if (t) {
+            document.body.classList.add(`theme-${t}`);
+          }
+        }
+      })();
+    </script>
     <script type="module" src="/_dist_/index.js"></script>
     <!--
       This HTML file is a template.

@@ -36,6 +36,7 @@
     "@rollup/plugin-replace": "^2.3.3",
     "@sindresorhus/slugify": "^1.0.0",
     "@snowpack/app-scripts-svelte": "^1.1.4",
+    "@snowpack/plugin-webpack": "^1.1.5",
     "@sveltech/routify": "^1.8.0-beta.24",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/svelte": "^3.0.0",
