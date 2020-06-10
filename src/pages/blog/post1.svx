@@ -23,8 +23,6 @@ mdsvex({
 
 ### line numbering and wrapping
 
-
-
 ```js
 const str = `i'm short`;
 const str2 = 'me too';
