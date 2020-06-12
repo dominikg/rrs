@@ -228,3 +228,8 @@ export default async function createHighlighter(opts) {
   user-select: none;
 }
 ```
+
+<script>
+import ThemeSwitch from 'src/components/ThemeSwitch.svelte'
+</script>
+<ThemeSwitch/>
