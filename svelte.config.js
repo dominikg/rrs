@@ -9,7 +9,7 @@ const rollup = {
   hydratable: false,
   // we'll extract any component CSS out into
   // a separate file — better for performance
-  css: true,
+  css: false,
   //extensions: ['.svelte', '.md'],
   preprocess: [postcss()],
 };

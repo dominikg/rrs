@@ -230,6 +230,6 @@ export default async function createHighlighter(opts) {
 ```
 
 <script>
-import ThemeSwitch from 'src/components/ThemeSwitch.svelte'
+import ThemeSwitch from '../../components/ThemeSwitch.svelte'
 </script>
 <ThemeSwitch/>

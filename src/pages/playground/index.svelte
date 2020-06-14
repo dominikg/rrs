@@ -1,17 +1,17 @@
 <script>
-  import penguin from 'static/penguin.png'; // case 1, imported in script
+  import penguin from '../../../static/penguin.png'; // case 1, imported in script
   import account_plus from '@mdi/svg/svg/account-plus.svg';
 
   let lazy;
 
   function loadLazy() {
-    import('src/components/Lazy.svelte').then((m) => (lazy = m.default));
+    import('../../components/Lazy.svelte').then((m) => (lazy = m.default));
   }
 </script>
 
 <style>
   .elephant {
-    background-image: url('static/elephant.png'); /* case 2, referenced in css url */
+    background-image: url('../../../static/elephant.png'); /* case 2, referenced in css url */
   }
 
   .btn {

@@ -1,4 +1,4 @@
-/* sans 100 */
+/*
 @font-face {
   font-family: 'Cooper Hewitt';
   font-style: normal;
@@ -17,7 +17,7 @@
     url('typeface-cooper-hewitt/files/cooper-hewitt-100italic.woff2') format('woff2');
 }
 
-/* sans 400 */
+
 @font-face {
   font-family: 'Cooper Hewitt';
   font-style: normal;
@@ -36,8 +36,6 @@
     url('typeface-cooper-hewitt/files/cooper-hewitt-400italic.woff2') format('woff2');
 }
 
-/* sans 700 */
-/* cooper hewitt 400->700 step is too bold use 600 file instead */
 @font-face {
   font-family: 'Cooper Hewitt';
   font-style: normal;
@@ -56,8 +54,7 @@
     url('typeface-cooper-hewitt/files/cooper-hewitt-600italic.woff2') format('woff2');
 }
 
-/* sans 900 */
-/* cooper hewitt has no 900, use 800 file instead */
+
 @font-face {
   font-family: 'Cooper Hewitt';
   font-style: normal;
@@ -120,7 +117,9 @@
   font-family: 'Fira Code VF';
   font-display: swap;
   src: url('firacode/distr/woff2/FiraCode-VF.woff2') format('woff2-variations');
-  /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+
   font-weight: 300 700;
   font-style: normal;
 }
+*/
+/* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */

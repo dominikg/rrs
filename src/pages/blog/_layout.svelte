@@ -1,7 +1,7 @@
 <script>
   import { page } from '@sveltech/routify/runtime';
-  import BlogPost from 'src/components/BlogPost.svelte';
-  import BlogCard from 'src/components/BlogCard.svelte';
+  import BlogPost from '../../components/BlogPost.svelte';
+  import BlogCard from '../../components/BlogCard.svelte';
 
   let current, next, prev, isIndex;
 

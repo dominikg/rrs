@@ -1,7 +1,7 @@
 module.exports = {
   scripts: {
     'mount:public': 'mount public --to /',
-    'mount:static': 'mount static --to /',
+    'mount:static': 'mount static --to /_dist_/static',
     'mount:src': 'mount src --to /_dist_/src',
     'mount:routify': 'mount .routify --to /_dist_/.routify',
     'run:routify': 'routify run',

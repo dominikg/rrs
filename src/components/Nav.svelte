@@ -1,7 +1,7 @@
 <script>
   import { isActive, url } from '@sveltech/routify/runtime';
   import ThemeSwitch from './ThemeSwitch.svelte';
-  import favicon from 'static/favicon.svg';
+  import favicon from '../../static/favicon.svg';
 
   const navitems = [
     ['./blog', 'Blog'],
