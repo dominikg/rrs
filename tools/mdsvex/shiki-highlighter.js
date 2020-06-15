@@ -7,7 +7,7 @@ const escapeChars = {
   '&': '&amp;',
   '{': '&#123;',
   '}': '&#125;',
-  //  '`': '&#96;'
+  '`': '&#96;',
 };
 
 const escapeRE = new RegExp(`[${Object.keys(escapeChars).join('')}]`, 'g');
@@ -23,9 +23,9 @@ function render(lines, options) {
   const { fg, bg } = options;
   const lineNumbers = options.showLineNumbers(lines.length, options.lang);
   const lang = options.lang ? `<span class="code-language">${options.lang}</span>` : '';
-  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">${lang}<code class="${
+  return `<pre class="code-highlight" style="color: ${fg}; background-color: ${bg}">{@html \`${lang}<code class="${
     lineNumbers ? 'numbered' : 'simple'
-  }">${lines.map(lineRenderer(options)).join('\n')}\n</code></pre>`;
+  }">${lines.map(lineRenderer(options)).join('\n')}\n</code>\`}</pre>`;
 }
 
 const lineRenderer = (options) => (line) => {
