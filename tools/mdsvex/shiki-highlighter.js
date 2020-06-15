@@ -7,6 +7,7 @@ const escapeChars = {
   '&': '&amp;',
   '{': '&#123;',
   '}': '&#125;',
+  //  '`': '&#96;'
 };
 
 const escapeRE = new RegExp(`[${Object.keys(escapeChars).join('')}]`, 'g');

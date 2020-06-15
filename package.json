@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "routify": "routify run",
-    "start": "snowpack dev",
-    "build": "snowpack build",
+    "start": "vite",
+    "build": "node tools/vite/build",
     "test": "jest",
     "serve:build": "serve -s build",
     "lint": "run-p lint:script lint:style",
@@ -87,7 +87,8 @@
     "svelte-preprocess": "^3.9.7",
     "tailwindcss": "^1.4.6",
     "typeface-cooper-hewitt": "^0.0.44",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "vite": "^0.20.8"
   },
   "browserslist": [
     "last 2 Chrome versions",

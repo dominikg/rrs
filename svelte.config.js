@@ -1,33 +1,22 @@
 const { mdsvex } = require('mdsvex');
 const { postcss } = require('svelte-preprocess');
 const { createHighlighter } = require('./tools/mdsvex/shiki-highlighter');
-// import smartAssetPreprocessor from "./tools/svelte-preprocessors/smart-asset";
 const { isDevelopment } = require('./build-constants');
 
-const rollup = {
-  dev: isDevelopment,
-  hydratable: false,
-  // we'll extract any component CSS out into
-  // a separate file — better for performance
-  css: false,
-  //extensions: ['.svelte', '.md'],
-  preprocess: [postcss()],
-};
-
-const snowpack = async function () {
-  const mdsvexPreprocessor = mdsvex({
-    extension: '.svx',
-    highlight: {
-      highlighter: await createHighlighter({ showLineNumbers: (numberOfLines, lang) => numberOfLines > 3 || lang === 'ts' }),
-    },
-  });
+module.exports = async function () {
   return {
-    ...rollup,
-    preprocess: rollup.preprocess.concat(mdsvexPreprocessor),
+    dev: isDevelopment,
+    hydratable: false,
+    css: true, // TODO extract css
+    extensions: ['.svelte', '.svx'],
+    preprocess: [
+      postcss(),
+      mdsvex({
+        extension: '.svx',
+        highlight: {
+          highlighter: await createHighlighter({ showLineNumbers: (numberOfLines, lang) => numberOfLines > 3 || lang === 'ts' }),
+        },
+      }),
+    ],
   };
-};
-
-module.exports = {
-  rollup,
-  snowpack,
 };
