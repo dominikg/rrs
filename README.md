@@ -1,4 +1,4 @@
-# An attempt at building a svelte routify application with snowpack
+# An attempt at building a svelte routify application with vite
 
 ## usage
 
