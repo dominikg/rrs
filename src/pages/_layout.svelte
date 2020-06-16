@@ -7,7 +7,7 @@
   #app {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: max-content 1fr auto;
     grid-gap: 1rem;
   }

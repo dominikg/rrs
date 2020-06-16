@@ -14,7 +14,7 @@ const escapeRE = new RegExp(`[${Object.keys(escapeChars).join('')}]`, 'g');
 
 function escape(str) {
   if (str && str.length !== 0) {
-    return str.replace(escapeRE, (c) => escapeChars[c]);
+    return str.replace(escapeRE, (c) => escapeChars[c]).replace(/\\([trn])/g, '&#92;$1');
   }
   return '';
 }

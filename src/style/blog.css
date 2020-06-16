@@ -1,9 +1,10 @@
 .code-highlight {
   position: relative;
   @apply font-mono text-sm shadow-md rounded;
+  height: auto;
+  max-height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 80vh;
   margin: 1rem;
 }
 
@@ -14,25 +15,38 @@
   @apply bg-primary text-on-primary px-2;
   border-top-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+  user-select: none;
 }
 
 .code-highlight > code {
-  display: inline-block;
-  padding: 1rem;
+  display: block;
+  padding: 0.5rem;
+  overflow-x: auto;
+  height: auto;
+  margin: 0;
 }
 
 .code-highlight > code.numbered {
   margin-left: 2rem;
-  padding-left: 0.5rem;
   border-left: 1px solid rgba(127, 127, 127, 0.5);
   counter-reset: line;
-  padding-right: 2rem; /* .line-of-code has width 100% and would overflow right due to margin, offset that with a padding */
 }
 
 .code-highlight > code > .line-of-code {
-  white-space: pre-wrap;
+  white-space: nowrap;
   display: inline-block;
   min-height: 1em;
+}
+
+.code-highlight > code.numbered > .line-of-code:before {
+  counter-increment: line;
+  content: counter(line);
+  position: absolute;
+  left: 0;
+  opacity: 0.5;
+  text-align: right;
+  padding-right: 0.25rem;
+  width: 2rem;
 }
 
 h1 {
@@ -53,17 +67,4 @@ h3 {
 
 p {
   padding: 0.25rem;
-}
-
-.code-highlight > code.numbered > .line-of-code:before {
-  counter-increment: line;
-  content: counter(line);
-  position: absolute;
-  left: 0;
-  opacity: 0.5;
-  text-align: right;
-  padding-right: 0.25rem;
-  width: 2rem;
-  pointer-events: none;
-  user-select: none;
 }
