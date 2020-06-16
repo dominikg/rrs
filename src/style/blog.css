@@ -26,13 +26,13 @@
   padding-left: 0.5rem;
   border-left: 1px solid rgba(127, 127, 127, 0.5);
   counter-reset: line;
+  padding-right: 2rem; /* .line-of-code has width 100% and would overflow right due to margin, offset that with a padding */
 }
 
 .code-highlight > code > .line-of-code {
   white-space: pre-wrap;
   display: inline-block;
   min-height: 1em;
-  padding-right: 0.5rem;
 }
 
 h1 {
@@ -53,10 +53,6 @@ h3 {
 
 p {
   padding: 0.25rem;
-}
-
-.code-highlight > code.numbered > .line-of-code {
-  padding-right: 2.5rem;
 }
 
 .code-highlight > code.numbered > .line-of-code:before {

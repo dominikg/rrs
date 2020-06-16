@@ -1,7 +1,7 @@
 <script>
   import './style/main.css';
   import { Router } from '@sveltech/routify/runtime';
-  import { routes } from '../.routify/routes';
+  import routes from './routes';
 </script>
 
-<Router {routes} />
+<Router routes={$routes} />
