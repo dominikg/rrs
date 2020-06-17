@@ -1,3 +1,15 @@
 module.exports = {
-  ...require('@snowpack/app-scripts-svelte/jest.config.js')(),
+  transform: {
+    '^.+\\.svelte$': [
+      'svelte-jester',
+      {
+        preprocess: false,
+        debug: false,
+        //"compilerOptions": {}
+      },
+    ],
+    '^.+\\.js$': 'babel-jest',
+  },
+  moduleFileExtensions: ['js', 'svelte'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
 };

@@ -14,7 +14,7 @@ module.exports = async function () {
       mdsvex({
         extension: '.svx',
         highlight: {
-          highlighter: await createHighlighter({ showLineNumbers: (numberOfLines, lang) => numberOfLines > 3 || lang === 'ts' }),
+          highlighter: await createHighlighter({ showLineNumbers: (numberOfLines) => numberOfLines > 3 }),
         },
       }),
     ],
