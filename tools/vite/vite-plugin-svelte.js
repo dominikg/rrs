@@ -1,9 +1,14 @@
-const { compile, preprocess } = require('svelte/compiler');
+const { compile, preprocess, walk } = require('svelte/compiler');
+const { createMakeHot } = require('svelte-hmr');
 
-let { Readable } = require('stream');
+const hot = true;
+
+const { Readable } = require('stream');
 
 const path = require('path');
 const svelteConfig = require(path.join(process.cwd(), 'svelte.config.js'));
+
+const makeHot = createMakeHot({ walk });
 
 function readBody(stream) {
   if (stream instanceof Readable) {
@@ -67,11 +72,19 @@ module.exports = function sveltePlugin(opts = {}) {
             // COMPILE
             let result;
             try {
-              const { js, css } = compile(codeToCompile, {
+              const compiled = compile(codeToCompile, {
                 ...compileOptions,
+                // NOTE dev is required for HMR
+                dev: hot || compileOptions.dev,
                 filename: filePath,
               });
+              const { js, css } = compiled;
               result = { result: js && js.code };
+              if (hot) {
+                const code = result.result;
+                const hotOptions = { compatVite: true, optimistic: true };
+                result.result = makeHot(filePath, code, hotOptions, compiled, codeToCompile, compileOptions);
+              }
               if (!compilerOptions.css) {
                 result.resources = { css: css && css.code };
               }

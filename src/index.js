@@ -6,9 +6,11 @@ const app = new App({
 
 export default app;
 
-if (import.meta.hot) {
-  import.meta.hot.dispose(() => {
-    app.$destroy();
-  });
-  import.meta.hot.accept();
-}
+// NOTE I'm not sure it is a good idea to accept here, given how I seemed to get
+// weird update bubbling, a full reload might be preferable
+//
+// if (import.meta.hot) {
+//   import.meta.hot.accept(() => {
+//     app.$destroy()
+//   });
+// }
