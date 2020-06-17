@@ -23,8 +23,8 @@ a working routify application built with vite
 
 ## Features
 
-- routify
-- mdsvex
+- routify with custom blog route meta
+- mdsvex with custom shiki highlighter
 - tailwindcss
 - dev server with HMR
 - optimized production build
