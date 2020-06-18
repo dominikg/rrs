@@ -1,9 +1,5 @@
-const sveltePlugin = require('./tools/vite/vite-plugin-svelte');
+const sveltePlugin = require('./tools/vite/vite-plugin-svelte-hot');
 
 module.exports = {
-  alias: {
-    svelte: 'svelte/internal',
-  },
   plugins: [sveltePlugin()],
-  rollupDedupe: ['svelte', 'svelte/internal'],
 };
