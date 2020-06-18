@@ -6,6 +6,8 @@ const { createMakeHot } = require('svelte-hmr');
 const { cosmiconfigSync } = require('cosmiconfig');
 const { Readable } = require('stream');
 
+const svelteDeps = ['svelte', 'svelte/animate', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition'];
+
 const rollupPluginDedupeSvelte = require('@rollup/plugin-node-resolve').nodeResolve({
   dedupe: (importee) => importee === 'svelte' || importee.startsWith('svelte/'),
 });
@@ -114,17 +116,53 @@ function createConfigs(pluginOptions) {
  */
 function createSvelteRequestFilter(svelteOptions) {
   const filter = createFilter(svelteOptions.include, svelteOptions.exclude);
-  const extensions = svelteOptions.extensions || ['.svelte'];
+  const extensions = svelteOptions.extensions || ['.svelte']; // rollup-plugin-svelte fallback includes .html but vite might disagree, so don't
   return (ctx) => ctx.body && filter(ctx.path) && extensions.includes(path.extname(ctx.path));
+}
+
+function updateViteConfig(viteConfig) {
+  if (!viteConfig.optimizeDeps) {
+    viteConfig.optimizeDeps = { include: svelteDeps };
+  } else if (viteConfig.optimizeDeps.include) {
+    viteConfig.optimizeDeps.include.push(...svelteDeps);
+  } else {
+    console.warn('failed to add svelteDeps to vite optimizeDeps');
+  }
+}
+
+function createSvelteMiddleware(config) {
+  const devRollupPluginSvelte = rollupPluginSvelte(config.dev);
+  const isSvelteRequest = createSvelteRequestFilter(config.dev);
+
+  return async (ctx, next) => {
+    await next();
+
+    if (!isSvelteRequest(ctx)) {
+      return;
+    }
+    const id = ctx.path;
+    let codeToCompile = await readBody(ctx.body);
+    let output;
+    try {
+      const compiled = { js: await devRollupPluginSvelte.transform(codeToCompile, id) };
+      if (config.hot) {
+        output = makeHot(id, compiled.js.code, config.hot, compiled, codeToCompile, config.dev);
+      } else {
+        output = compiled.js.code;
+      }
+      ctx.type = 'js';
+      ctx.body = output;
+    } catch (e) {
+      console.error(`failed to compile ${id}`, { codeToCompile }, e);
+      throw e;
+    }
+  };
 }
 
 module.exports = function vitePluginSvelteHot(pluginOptions = {}) {
   const config = createConfigs(pluginOptions);
   return {
-    alias: {
-      svelte: 'svelte/internal',
-    },
-    rollupDedupe: ['svelte', 'svelte/internal'], // doesn't work here
+    rollupDedupe: svelteDeps, // doesn't work here
     rollupInputOptions: {
       plugins: [
         rollupPluginDedupeSvelte, // but this does.
@@ -132,32 +170,10 @@ module.exports = function vitePluginSvelteHot(pluginOptions = {}) {
       ],
     },
     configureServer: [
-      async ({ app }) => {
-        const devRollupPluginSvelte = rollupPluginSvelte(config.dev);
-        const isSvelteRequest = createSvelteRequestFilter(config.dev);
-        app.use(async (ctx, next) => {
-          await next();
-          if (!isSvelteRequest(ctx)) {
-            return;
-          }
-          const id = ctx.path;
-
-          let codeToCompile = await readBody(ctx.body);
-          let output;
-          try {
-            const compiled = { js: await devRollupPluginSvelte.transform(codeToCompile, id) };
-            if (config.hot) {
-              output = makeHot(id, compiled.js.code, config.hot, compiled, codeToCompile, config.dev);
-            } else {
-              output = compiled.js.code;
-            }
-            ctx.type = 'js';
-            ctx.body = output;
-          } catch (e) {
-            console.error(`failed to compile ${id}`, { codeToCompile }, e);
-            throw e;
-          }
-        });
+      async ({ app, config: viteConfig }) => {
+        updateViteConfig(viteConfig);
+        config.vite = viteConfig; // might be needed later to support sourcemaps et al
+        app.use(createSvelteMiddleware(config));
       },
     ],
   };

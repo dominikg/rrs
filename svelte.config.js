@@ -1,6 +1,5 @@
-const { mdsvex } = require('mdsvex');
 const { postcss } = require('svelte-preprocess');
-// const { createHighlighter } = require('./tools/mdsvex/shiki-highlighter');
+const { asyncMdsvex } = require('./tools/mdsvex/async-mdsvex');
 const { isDevelopment } = require('./build-constants');
 
 module.exports = {
@@ -8,13 +7,5 @@ module.exports = {
   hydratable: false,
   css: true, // TODO extract css
   extensions: ['.svelte', '.svx'],
-  preprocess: [
-    postcss(),
-    mdsvex({
-      extension: '.svx',
-      //highlight: {
-      //  highlighter: await createHighlighter({ showLineNumbers: (numberOfLines) => numberOfLines > 3 }),
-      //},
-    }),
-  ],
+  preprocess: [postcss(), asyncMdsvex()],
 };
