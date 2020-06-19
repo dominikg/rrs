@@ -1,5 +1,7 @@
-const sveltePlugin = require('./tools/vite/vite-plugin-svelte-hot');
-
+const svite = require('svite');
 module.exports = {
-  plugins: [sveltePlugin()],
+  plugins: [svite()],
+  optimizeDeps: {
+    include: ['@sveltech/routify/runtime', '@sveltech/routify/runtime/plugins/tree', '@sveltech/routify/runtime/plugins/assignAPI'],
+  },
 };
